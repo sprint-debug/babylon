@@ -41,7 +41,9 @@
     "react-router-dom": "^6.13.0",
     "react-spinners": "^0.13.8",
     "styled-components": "^5.3.11",
-    "styled-reset": "^4.4.7"
+    "styled-reset": "^4.4.7",
+    "@sentry/browser": "^7.49.0",
+    "@sentry/core": "^7.49.0"
   },
   "devDependencies": {
     "@babylonjs/gui-editor": "^6.8.0",

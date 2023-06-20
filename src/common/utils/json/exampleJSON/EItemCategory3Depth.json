@@ -1,0 +1,24 @@
+{
+  "10001": {
+    "EnumType": "SKIN",
+    "Name": "얼굴",
+    "Desc": "아바타 얼굴",
+    "Parent": "BODY",
+    "ActiveIcon": "body/face_active.svg",
+    "InActiveIcon": "body/face.svg",
+    "Option": "color",
+    "IsShowShop": true,
+    "HideWhenEquipped": ""
+  },
+  "10002": {
+    "EnumType": "EYE",
+    "Name": "눈",
+    "Desc": "아바타 눈 형태",
+    "Parent": "BODY",
+    "ActiveIcon": "body/eye_active.svg",
+    "InActiveIcon": "body/eye.svg",
+    "Option": "color",
+    "IsShowShop": true,
+    "HideWhenEquipped": ""
+  }
+}

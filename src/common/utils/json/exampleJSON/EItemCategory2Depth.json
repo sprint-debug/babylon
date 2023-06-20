@@ -1,0 +1,20 @@
+{
+  "10000": {
+    "EnumType": "Example",
+    "Name": "Example",
+    "Desc": "Example",
+    "Parent": "Example",
+    "ActiveIcon": "body_active.svg",
+    "InActiveIcon": "body.svg",
+    "IsShow": true
+  },
+  "11000": {
+    "EnumType": "Example",
+    "Name": "Example",
+    "Desc": "Example",
+    "Parent": "Example",
+    "ActiveIcon": "",
+    "InActiveIcon": "",
+    "IsShow": false
+  }
+}

@@ -1,0 +1,18 @@
+{
+    "1": {
+        "EnumType": "TypeName1",
+        "Name": "아바타 프리셋",
+        "Desc": "아바타를 구성하는 아이템",
+        "Parent": "",
+        "ActiveIcon": "",
+        "InActiveIcon": ""
+    },
+    "2": {
+        "EnumType": "TypeName2",
+        "Name": "아바타 아이템",
+        "Desc": "아바타에 장착하는 아이템",
+        "Parent": "",
+        "ActiveIcon": "",
+        "InActiveIcon": ""
+    }
+}
