@@ -6,7 +6,7 @@ import TextCore from '@/components/_core/TextCore';
 import { Engine } from "@babylonjs/core"
 
 setTimeout(() => {
-  babylonInit('myRoom').then(() => {
+  babylonInit('testRoom').then(() => {
     // scene started rendering, everything is initialized
   });
 }, 500);
@@ -26,8 +26,8 @@ const Demo = () => {
         onChange={handleChangeScene}
         items={[
           {
-            value: 'myRoom',
-            children: <TextCore text={'myRoom'} />,
+            value: 'testRoom',
+            children: <TextCore text={'testRoom'} />,
           },
           {
             value: 'setupEnv',
