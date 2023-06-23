@@ -15,25 +15,6 @@ let box: any;
 
 const onSceneReady = (scene: Scene) => {
 
-  // This creates and positions a free camera (non-mesh)
-  const camera = new FreeCamera('camera1', new Vector3(0, 5, -10), scene);
-
-  SceneLoader.ImportMesh('', '/src/assets/_sample/BarramundiFish/glTF/BarramundiFish.gltf', '', scene, function (meshes) {
-    // Callback function executed when the model is loaded
-    console.log('GLTF file loaded successfully ', meshes);
-    meshes[0].position = new Vector3(0, 0, 2);
-    meshes[0].scaling.y = 2;
-    meshes.forEach(mesh => {
-      console.log('each mesh ', mesh)
-      scene.addMesh(mesh);
-    });
-    camera.target = meshes[0].position;
-  }, undefined, undefined, '.gltf');
-
-  // SceneLoader.LoadAssetContainerAsync("", '/src/assets/_sample/BarramundiFish/glTF/BarramundiFish.gltf', scene, function (meshes) {
-  //   camera.target = meshes[0].position;
-  // }, ".gltf")
-
   // debug 용
   void Promise.all([
     import("@babylonjs/core/Debug/debugLayer"),
@@ -41,10 +22,26 @@ const onSceneReady = (scene: Scene) => {
   ]).then((_values) => {
     scene.debugLayer.show({
       handleResize: true,
-      overlay: true,
+      overlay: false,
+      // overlay: true, // inspector 대비 비율 화면
       globalRoot: document.getElementById("#root") || undefined,
     })
   })
+
+  // This creates and positions a free camera (non-mesh)
+  const camera = new FreeCamera('camera1', new Vector3(0, 5, -10), scene);
+
+  SceneLoader.ImportMesh('', '/src/assets/_sample/BarramundiFish/glTF/BarramundiFish.gltf', '', scene, function (meshes) {
+    // Callback function executed when the model is loaded
+    console.log('GLTF file loaded successfully ', meshes);
+    meshes[0].position = new Vector3(0, 0, 2);
+    camera.target = meshes[0].position;
+  }, undefined, undefined, '.gltf');
+
+  // SceneLoader.LoadAssetContainerAsync("", '/src/assets/_sample/BarramundiFish/glTF/BarramundiFish.gltf', scene, function (meshes) {
+  //   camera.target = meshes[0].position;
+  // }, ".gltf")
+
 
 
   // This targets the camera to scene origin
@@ -52,8 +49,8 @@ const onSceneReady = (scene: Scene) => {
 
 
   const canvas = scene.getEngine().getRenderingCanvas();
-  canvas!.height = 350;
-  canvas!.width = 500;
+  canvas!.height = 450;
+  canvas!.width = 600;
 
   // This attaches the camera to the canvas
   camera.attachControl(canvas, true);
@@ -70,9 +67,8 @@ const onSceneReady = (scene: Scene) => {
   // // Move the box upward 1/2 its height
   // box.position.y = 1;
 
-  // box.actionManager = new ActionManager(scene);
-
   // // event handler
+  // box.actionManager = new ActionManager(scene);
   // box.actionManager.registerAction(
   //   new ExecuteCodeAction(ActionManager.OnPickTrigger, () => {
   //     messageClient.postMessage('alert', { text: 'hi' });
@@ -100,7 +96,7 @@ const onRender = (scene: Scene) => {
   }
 };
 
-const PlayScene = () => {
+const ProtoTypeScene = () => {
   return (
     <SceneComponent
       antialias
@@ -111,4 +107,4 @@ const PlayScene = () => {
   );
 };
 
-export default PlayScene;
+export default ProtoTypeScene;

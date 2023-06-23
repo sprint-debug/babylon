@@ -1,30 +1,31 @@
 import Demo from '@/pages/Demo';
 import Home from '@/pages/Home';
 import Room from '@/pages/Room';
-import Play01 from '@/pages/Play01';
+import Tutorial from '@/pages/Tutorial';
+import ProtoType from '@/pages/ProtoType';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Play01 />,
+    element: <Tutorial />,
   },
-  {
-    path: '/demo',
-    element: <Demo />,
-  },
-  {
-    path: '/:id',
-    element: <Demo />,
-  },
-  {
-    path: '/home',
-    element: <Home />,
-  },
-  {
-    path: '/rooms/:id',
-    element: <Room />,
-  },
+  // {
+  //   path: '/prototype',
+  //   element: <ProtoType />,
+  // },
+  // {
+  //   path: '/demo',
+  //   element: <Demo />,
+  // },
+  // {
+  //   path: '/home',
+  //   element: <Home />,
+  // },
+  // {
+  //   path: '/rooms/:id',
+  //   element: <Room />,
+  // },
 ]);
 
 const RootRouter = () => {

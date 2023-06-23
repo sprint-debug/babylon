@@ -1,10 +1,10 @@
 import React from 'react';
-import PlayScene from './PlayScene';
+import TutorialScene from './TutorialScene';
 import { messageClient } from '@/clients/events';
 import Button from '@/components/Button';
 import FixedView from '../_shared/Layouts/FixedView';
 
-const Play01 = () => {
+const Tutorial = () => {
   React.useEffect(() => {
     messageClient.addListener('alert', (payload: any) => {
       alert(payload.text);
@@ -17,7 +17,7 @@ const Play01 = () => {
 
   return (
     <FixedView>
-      <PlayScene />
+      <TutorialScene />
       <Button
         onClick={() => {
           messageClient.postMessage('box');
@@ -29,7 +29,7 @@ const Play01 = () => {
   );
 };
 
-export default Play01;
+export default Tutorial;
 
 
 // import React from 'react';
