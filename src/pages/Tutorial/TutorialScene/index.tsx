@@ -1,5 +1,6 @@
 import SceneComponent, { useScene } from 'babylonjs-hook';
 import {
+  Mesh,
   FreeCamera,
   Vector3,
   Vector4,
@@ -21,7 +22,6 @@ import { messageClient } from '@/clients/events';
 let box: any;
 
 const onSceneReady = (scene: Scene) => {
-
   // debug 용
   void Promise.all([
     import("@babylonjs/core/Debug/debugLayer"),
@@ -118,17 +118,19 @@ const onSceneReady = (scene: Scene) => {
   box1.material = boxMat1;
 
 
+
+
+  /** Will run on every frame render.  We are spinning the box on y-axis.*/
+  // const onRender = (scene: Scene) => {
+  //   if (box !== undefined) {
+  //     const deltaTimeInMillis = scene.getEngine().getDeltaTime();
+
+  //     const rpm = 10;
+  //     box.rotation.y += (rpm / 60) * Math.PI * 2 * (deltaTimeInMillis / 1000);
+  //   }
+  // };
 };
 
-/** Will run on every frame render.  We are spinning the box on y-axis.*/
-// const onRender = (scene: Scene) => {
-//   if (box !== undefined) {
-//     const deltaTimeInMillis = scene.getEngine().getDeltaTime();
-
-//     const rpm = 10;
-//     box.rotation.y += (rpm / 60) * Math.PI * 2 * (deltaTimeInMillis / 1000);
-//   }
-// };
 
 const PlayScene = () => {
   return (
