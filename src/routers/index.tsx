@@ -6,6 +6,7 @@ import Room from '@/pages/Room';
 import Tutorial from '@/pages/Tutorial';
 import CBF from '@/pages/Tutorial/CreateBuildFunction';
 import CMI from '@/pages/Tutorial/CreateMultipleInstance';
+import WAL from '@/pages/Tutorial/WebLayout';
 import ProtoType from '@/pages/ProtoType';
 import Error from '@/pages/Error';
 
@@ -19,12 +20,16 @@ const router = createBrowserRouter([
         element: <Tutorial />,
       },
       {
-        path: 'example01',
+        path: 'ex01',
         element: <CBF />,
       },
       {
-        path: 'example02',
+        path: 'ex02',
         element: <CMI />,
+      },
+      {
+        path: 'ex03',
+        element: <WAL />,
       },
       // {
       //   path: 'login',
