@@ -27,6 +27,7 @@ i18n.use(initReactI18next).init({
 });
 
 const App = () => {
+  console.log('APP.tsx loaded');
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />

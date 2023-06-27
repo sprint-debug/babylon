@@ -135,9 +135,9 @@ const PlayScene = () => {
   React.useEffect(() => {
 
     return () => {
-      // scene.debugLayer.hide();
       // todo 이벤트 리스너 제거필요
       console.log('cleanup tuto scene')
+      messageClient.removeListener('exitInspector');
     }
   }, [])
 

@@ -1,8 +1,9 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import App from '@/App';
 import Demo from '@/pages/Demo';
 import Home from '@/pages/Home';
 import Room from '@/pages/Room';
+import Init from '@/pages/Init';
 import TutorialMenu from '@/pages/Tutorial';
 import Tutorial from '@/pages/Tutorial/TutorialScene';
 import CBF from '@/pages/Tutorial/CreateBuildFunction';
@@ -19,6 +20,7 @@ import Error from '@/pages/Error';
 const router = createBrowserRouter([
   {
     path: '/',
+    // element: <Navigate to='/tutorial' replace />,
     element: <App />,
     // with this data loaded before rendering
     // loader: async ({ request, params }) => {
@@ -30,8 +32,12 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <TutorialMenu />,
+        element: <Init />,
       },
+      // {
+      //   path: 'login',
+      //   element: <Login />,
+      // },
       {
         path: 'tutorial',
         element: <TutorialMenu />,
@@ -71,10 +77,6 @@ const router = createBrowserRouter([
           },
         ]
       },
-      // {
-      //   path: 'login',
-      //   element: <Login />,
-      // },
     ],
     errorElement: <Error />,
   },

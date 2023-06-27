@@ -127,6 +127,7 @@ const CreateBuildFunctionScene = () => {
     return () => {
       // todo 이벤트 리스너 제거필요
       console.log('cleanup CBF scene')
+      messageClient.removeListener('exitInspector');
     }
   }, [])
   return (
