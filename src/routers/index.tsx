@@ -7,6 +7,8 @@ import Tutorial from '@/pages/Tutorial';
 import CBF from '@/pages/Tutorial/CreateBuildFunction';
 import CMI from '@/pages/Tutorial/CreateMultipleInstance';
 import WAL from '@/pages/Tutorial/WebLayout';
+import MeshParentDisc from '@/pages/Tutorial/MeshParentDisc';
+import MeshParentBox from '@/pages/Tutorial/MeshParentBox';
 import ProtoType from '@/pages/ProtoType';
 import Error from '@/pages/Error';
 
@@ -22,6 +24,7 @@ const router = createBrowserRouter([
       {
         path: 'ex01',
         element: <CBF />,
+        // children: []
       },
       {
         path: 'ex02',
@@ -30,6 +33,14 @@ const router = createBrowserRouter([
       {
         path: 'ex03',
         element: <WAL />,
+      },
+      {
+        path: 'ex04',
+        element: <MeshParentDisc />,
+      },
+      {
+        path: 'ex05',
+        element: <MeshParentBox />,
       },
       // {
       //   path: 'login',

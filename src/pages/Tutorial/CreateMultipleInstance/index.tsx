@@ -17,7 +17,7 @@ import {
 import "@babylonjs/loaders/glTF";
 
 const onSceneReady = (scene: Scene) => {
-  console.log('CreateMultipleInstance')
+  console.log('CreateMultipleInstance');
   // debug 용
   void Promise.all([
     import("@babylonjs/core/Debug/debugLayer"),
@@ -29,6 +29,7 @@ const onSceneReady = (scene: Scene) => {
       // overlay: true, // inspector 대비 비율 화면
       globalRoot: document.getElementById("#root") || undefined,
     })
+    // scene.debugLayer.hide();
   })
 
   const canvas = scene.getEngine().getRenderingCanvas();
@@ -42,7 +43,7 @@ const onSceneReady = (scene: Scene) => {
   const light = new HemisphericLight("light", new Vector3(1, 1, 0), scene);
 
   /** 아래에서 불러오는 파일이 주석처리 된 파일내용을 export 한 것 */
-  SceneLoader.ImportMeshAsync("", "/src/assets/ex_tutorial/", "town.glb" );
+  SceneLoader.ImportMeshAsync("", "/src/assets/ex_tutorial/", "town.glb");
 
   return scene;
 };
@@ -118,7 +119,7 @@ const onSceneReady = (scene: Scene) => {
 //     houses[i]!.position.x = places[i][2];
 //     houses[i]!.position.z = places[i][3];
 //   }
-  
+
 // }
 
 // const buildGround = () => {
