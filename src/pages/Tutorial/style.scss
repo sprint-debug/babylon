@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.menu_area {
+  min-width: 150px;
+}
+
+.scene_area {
+  flex-grow: 1;
+}

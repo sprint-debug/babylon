@@ -3,7 +3,8 @@ import App from '@/App';
 import Demo from '@/pages/Demo';
 import Home from '@/pages/Home';
 import Room from '@/pages/Room';
-import Tutorial from '@/pages/Tutorial';
+import TutorialMenu from '@/pages/Tutorial';
+import Tutorial from '@/pages/Tutorial/TutorialScene';
 import CBF from '@/pages/Tutorial/CreateBuildFunction';
 import CMI from '@/pages/Tutorial/CreateMultipleInstance';
 import WAL from '@/pages/Tutorial/WebLayout';
@@ -21,7 +22,28 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <TutorialMenu />,
+      },
+      {
+        path: 'tutorial',
+        element: <TutorialMenu />,
+        children: [
+          {
+            path: '1',
+            element: <CBF />
+            // children: []
+          },
+        ]
+      },
+      {
+        path: 'ex00',
         element: <Tutorial />,
+        // children: []
+      },
+      {
+        path: 'ex01',
+        element: <CBF />,
+        // children: []
       },
       {
         path: 'ex01',
