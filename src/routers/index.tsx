@@ -15,10 +15,18 @@ import Dude from '@/pages/Tutorial/Dude';
 import ProtoType from '@/pages/ProtoType';
 import Error from '@/pages/Error';
 
+/** https://reactrouter.com/en/main */
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    // with this data loaded before rendering
+    // loader: async ({ request, params }) => {
+    //   return fetch(
+    //     `/fake/api/teams/${params.teamId}.json`,
+    //     { signal: request.signal }
+    //   );
+    // },
     children: [
       {
         index: true,
@@ -30,49 +38,38 @@ const router = createBrowserRouter([
         children: [
           {
             path: '1',
-            element: <CBF />
+            element: <Tutorial />,
             // children: []
           },
+          {
+            path: '2',
+            element: <CBF />
+          },
+          {
+            path: '3',
+            element: <CMI />,
+          },
+          {
+            path: '4',
+            element: <WAL />,
+          },
+          {
+            path: '5',
+            element: <MeshParentDisc />,
+          },
+          {
+            path: '6',
+            element: <MeshParentBox />,
+          },
+          {
+            path: '7',
+            element: <Car />,
+          },
+          {
+            path: '8',
+            element: <Dude />,
+          },
         ]
-      },
-      {
-        path: 'ex00',
-        element: <Tutorial />,
-        // children: []
-      },
-      {
-        path: 'ex01',
-        element: <CBF />,
-        // children: []
-      },
-      {
-        path: 'ex01',
-        element: <CBF />,
-        // children: []
-      },
-      {
-        path: 'ex02',
-        element: <CMI />,
-      },
-      {
-        path: 'ex03',
-        element: <WAL />,
-      },
-      {
-        path: 'ex04',
-        element: <MeshParentDisc />,
-      },
-      {
-        path: 'ex05',
-        element: <MeshParentBox />,
-      },
-      {
-        path: 'ex06',
-        element: <Car />,
-      },
-      {
-        path: 'ex07',
-        element: <Dude />,
       },
       // {
       //   path: 'login',

@@ -1,4 +1,5 @@
-import SceneComponent, { useScene } from 'babylonjs-hook';
+import React from 'react';
+import SceneComponent from 'babylonjs-hook';
 import {
   Mesh,
   Vector3,
@@ -11,6 +12,7 @@ import {
   Color3,
   Texture,
 } from '@babylonjs/core';
+import { messageClient } from '@/clients/events';
 
 const onSceneReady = (scene: Scene) => {
   console.log('CreateBuildFunction')
@@ -51,6 +53,14 @@ const onSceneReady = (scene: Scene) => {
   //     box.rotation.y += (rpm / 60) * Math.PI * 2 * (deltaTimeInMillis / 1000);
   //   }
   // };
+
+  messageClient.addListener('exitInspector', (payload: any) => {
+    // alert(payload);
+    console.log('msg Client cbf ', document.getElementById('scene-explorer-host'));
+
+    scene.debugLayer.hide();
+  });
+
   return scene;
 };
 
@@ -110,8 +120,15 @@ const buildRoof = (width: number) => {
   return roof;
 }
 
-
 const CreateBuildFunctionScene = () => {
+
+  React.useEffect(() => {
+
+    return () => {
+      // todo 이벤트 리스너 제거필요
+      console.log('cleanup CBF scene')
+    }
+  }, [])
   return (
     <SceneComponent
       antialias

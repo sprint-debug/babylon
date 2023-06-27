@@ -1,25 +1,19 @@
-import SceneComponent, { useScene } from 'babylonjs-hook';
+import React from 'react';
+import SceneComponent from 'babylonjs-hook';
+// import SceneComponent from '@/clients/sceneComponentTemplate';
 import {
-  Mesh,
-  FreeCamera,
   Vector3,
   Vector4,
   HemisphericLight,
   MeshBuilder,
-  ActionManager,
   Scene,
-  SceneLoader,
-  ExecuteCodeAction,
   ArcRotateCamera,
   Sound,
-  Tools,
   StandardMaterial,
   Color3,
   Texture,
 } from '@babylonjs/core';
 import { messageClient } from '@/clients/events';
-
-let box: any;
 
 const onSceneReady = (scene: Scene) => {
   // debug 용
@@ -118,8 +112,6 @@ const onSceneReady = (scene: Scene) => {
   box1.material = boxMat1;
 
 
-
-
   /** Will run on every frame render.  We are spinning the box on y-axis.*/
   // const onRender = (scene: Scene) => {
   //   if (box !== undefined) {
@@ -129,10 +121,26 @@ const onSceneReady = (scene: Scene) => {
   //     box.rotation.y += (rpm / 60) * Math.PI * 2 * (deltaTimeInMillis / 1000);
   //   }
   // };
+  messageClient.addListener('exitInspector', (payload: any) => {
+    // alert(payload);
+    console.log('msg Client tuto ', document.getElementById('scene-explorer-host'));
+    scene.debugLayer.hide();
+  });
+
 };
 
 
 const PlayScene = () => {
+
+  React.useEffect(() => {
+
+    return () => {
+      // scene.debugLayer.hide();
+      // todo 이벤트 리스너 제거필요
+      console.log('cleanup tuto scene')
+    }
+  }, [])
+
   return (
     <SceneComponent
       antialias

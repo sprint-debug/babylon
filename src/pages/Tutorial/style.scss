@@ -10,3 +10,12 @@
 .scene_area {
   flex-grow: 1;
 }
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+#sidebar a.active {
+  color: red;
+}
