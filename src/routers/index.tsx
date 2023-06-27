@@ -10,6 +10,7 @@ import WAL from '@/pages/Tutorial/WebLayout';
 import MeshParentDisc from '@/pages/Tutorial/MeshParentDisc';
 import MeshParentBox from '@/pages/Tutorial/MeshParentBox';
 import Car from '@/pages/Tutorial/Car';
+import Dude from '@/pages/Tutorial/Dude';
 import ProtoType from '@/pages/ProtoType';
 import Error from '@/pages/Error';
 
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: 'ex06',
         element: <Car />,
+      },
+      {
+        path: 'ex07',
+        element: <Dude />,
       },
       // {
       //   path: 'login',
