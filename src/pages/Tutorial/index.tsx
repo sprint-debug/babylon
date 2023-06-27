@@ -13,6 +13,7 @@ const Tutorial = () => {
   }
 
   React.useEffect(() => {
+    // Todo: 이벤트 리스너 클린업이 안되서 전환 시마다 증가하고 있음
     messageClient.addListener('alert', (payload: any) => {
       alert(payload.text);
     });
@@ -38,17 +39,17 @@ const Tutorial = () => {
         >
           <>Box</>
         </Button>
-        <nav id='sidebar' className='sidebar'>
+        <nav id='sidebar' onClick={cleanUpInspector} className='sidebar'>
           <NavLink
             to='1'
-            onClick={cleanUpInspector}
+            // onClick={cleanUpInspector}
             className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""}
           >
             first example
           </NavLink>
           <NavLink
             to='2'
-            onClick={cleanUpInspector}
+            // onClick={cleanUpInspector}
             className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""}
           >
             createBuildFunction

@@ -1,6 +1,9 @@
 import { useEffect, useRef } from "react";
 import { Engine, Scene, SceneOptions } from "@babylonjs/core";
 import { EngineOptions } from '@babylonjs/core/Engines/thinEngine.js';
+
+/** babylon/hook으로 대체가능 파일, 커스터마이제이션 시 필요 */
+
 // @ts-ignore
 export default ({ antialias, engineOptions, adaptToDeviceRatio, sceneOptions, onRender, onSceneReady, ...rest }: {
   antialias?: boolean;
