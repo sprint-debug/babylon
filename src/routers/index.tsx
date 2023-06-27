@@ -9,6 +9,7 @@ import CMI from '@/pages/Tutorial/CreateMultipleInstance';
 import WAL from '@/pages/Tutorial/WebLayout';
 import MeshParentDisc from '@/pages/Tutorial/MeshParentDisc';
 import MeshParentBox from '@/pages/Tutorial/MeshParentBox';
+import Car from '@/pages/Tutorial/Car';
 import ProtoType from '@/pages/ProtoType';
 import Error from '@/pages/Error';
 
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: 'ex05',
         element: <MeshParentBox />,
+      },
+      {
+        path: 'ex06',
+        element: <Car />,
       },
       // {
       //   path: 'login',
