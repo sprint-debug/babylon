@@ -69,6 +69,12 @@ const Tutorial = () => {
           <NavLink to='10' className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} >
             MoveChar
           </NavLink>
+          <NavLink to='11' className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} >
+            CollisionDetection
+          </NavLink>
+          <NavLink to='12' className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} >
+            MoveChar
+          </NavLink>
         </nav>
 
       </div>

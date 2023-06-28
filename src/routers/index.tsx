@@ -15,6 +15,7 @@ import Car from '@/pages/Tutorial/Car';
 import Dude from '@/pages/Tutorial/Dude';
 import MovePOV from '@/pages/Tutorial/MovePOV';
 import MoveChar from '@/pages/Tutorial/MoveChar';
+import CollisionDetection from '@/pages/Tutorial/CollisionDetection';
 import ProtoType from '@/pages/ProtoType';
 import Error from '@/pages/Error';
 
@@ -82,6 +83,14 @@ const router = createBrowserRouter([
           },
           {
             path: '10',
+            element: <MoveChar />,
+          },
+          {
+            path: '11',
+            element: <CollisionDetection />,
+          },
+          {
+            path: '12',
             element: <MoveChar />,
           },
         ]
