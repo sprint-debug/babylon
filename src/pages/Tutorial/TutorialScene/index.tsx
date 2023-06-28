@@ -1,6 +1,5 @@
 import React from 'react';
 import SceneComponent from 'babylonjs-hook';
-// import SceneComponent from '@/clients/sceneComponentTemplate';
 import {
   Vector3,
   Vector4,
@@ -13,7 +12,9 @@ import {
   Color3,
   Texture,
 } from '@babylonjs/core';
+import { handleSceneSwitch } from '@/pages/Tutorial/subscribeMsgEvt';
 import { messageClient } from '@/clients/events';
+import { logger } from '@/common/utils/logger';
 
 const onSceneReady = (scene: Scene) => {
   // debug 용
@@ -78,8 +79,6 @@ const onSceneReady = (scene: Scene) => {
   boxMat1.diffuseTexture = new Texture("https://assets.babylonjs.com/environments/semihouse.png");
 
 
-
-
   //options parameter to set different images on eah side
   const faceUVBox = [];
   faceUVBox[0] = new Vector4(0.5, 0, 0.75, 1.0);
@@ -121,11 +120,9 @@ const onSceneReady = (scene: Scene) => {
   //     box.rotation.y += (rpm / 60) * Math.PI * 2 * (deltaTimeInMillis / 1000);
   //   }
   // };
-  messageClient.addListener('exitInspector', (payload: any) => {
-    // alert(payload);
-    console.log('msg Client tuto ', document.getElementById('scene-explorer-host'));
-    scene.debugLayer.hide();
-  });
+
+  /** scene 전환 시, inspector 종료작업 */
+  handleSceneSwitch(scene, { enableScopeInfo: true });
 
 };
 
@@ -133,11 +130,9 @@ const onSceneReady = (scene: Scene) => {
 const PlayScene = () => {
 
   React.useEffect(() => {
-
     return () => {
-      // todo 이벤트 리스너 제거필요
-      console.log('cleanup tuto scene')
-      messageClient.removeListener('exitInspector');
+      logger.log('cleanup tuto scene')
+      messageClient.removeListener('clear_inspector');
     }
   }, [])
 

@@ -1,17 +1,14 @@
-import SceneComponent, { useScene } from 'babylonjs-hook';
+import React from 'react';
+import SceneComponent from 'babylonjs-hook';
 import {
-  Mesh,
   Vector3,
-  Vector4,
   HemisphericLight,
-  MeshBuilder,
   Scene,
   ArcRotateCamera,
-  StandardMaterial,
-  Color3,
-  Texture,
-  SceneLoader
 } from '@babylonjs/core';
+import { handleSceneSwitch } from '@/pages/Tutorial/subscribeMsgEvt';
+import { messageClient } from '@/clients/events';
+import { logger } from '@/common/utils/logger';
 import './style.scss';
 
 // required glb imports
@@ -42,24 +39,34 @@ const onSceneReady = (scene: Scene) => {
 
   const light = new HemisphericLight("light", new Vector3(1, 1, 0), scene);
 
+  /** scene 전환 시, inspector 종료작업 */
+  handleSceneSwitch(scene, { enableScopeInfo: true });
 
   return scene;
 };
 
 const WebLayout = () => {
+
+  React.useEffect(() => {
+    return () => {
+      logger.log('cleanup tuto scene')
+      messageClient.removeListener('clear_inspector');
+    }
+  }, [])
+
   return (
     <>
-    <SceneComponent
-      antialias
-      onSceneReady={onSceneReady}
-      // onRender={onRender}
-      id="my-canvas"
-      className="game-view"
+      <SceneComponent
+        antialias
+        onSceneReady={onSceneReady}
+        // onRender={onRender}
+        id="my-canvas"
+        className="game-view"
       />
       <div className="ui-panel">
         test panel area
       </div>
-      </>
+    </>
   );
 };
 

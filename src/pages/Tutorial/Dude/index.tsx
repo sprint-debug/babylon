@@ -1,3 +1,4 @@
+import React from 'react';
 import SceneComponent from 'babylonjs-hook';
 import {
   Vector3,
@@ -12,6 +13,9 @@ import {
   SceneLoader
 } from '@babylonjs/core';
 import earcut from 'earcut';
+import { handleSceneSwitch } from '@/pages/Tutorial/subscribeMsgEvt';
+import { messageClient } from '@/clients/events';
+import { logger } from '@/common/utils/logger';
 
 
 const onSceneReady = (scene: Scene) => {
@@ -70,11 +74,21 @@ const onSceneReady = (scene: Scene) => {
   });
 
 
+
+  /** scene 전환 시, inspector 종료작업 */
+  handleSceneSwitch(scene, { enableScopeInfo: true });
+
   return scene;
 }
 
 
 const Dude = () => {
+  React.useEffect(() => {
+    return () => {
+      logger.log('cleanup tuto scene')
+      messageClient.removeListener('clear_inspector');
+    }
+  }, [])
   return (
     <SceneComponent
       antialias

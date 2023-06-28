@@ -1,16 +1,17 @@
 import React from 'react';
+import { Outlet, NavLink } from 'react-router-dom';
 import { messageClient } from '@/clients/events';
+import { logger } from '@/common/utils/logger';
 import Button from '@/components/Button';
 import Text from '@/components/Text';
 import FixedView from '../_shared/Layouts/FixedView';
-import { Outlet, NavLink } from 'react-router-dom';
 import './style.scss';
 
 const Tutorial = () => {
 
   const handleSceneSwitch = () => {
     // scene 전환 시 inspector 종료 통신한다.
-    messageClient.postMessage('exitInspector');
+    messageClient.postMessage('clear_inspector');
   }
 
   React.useEffect(() => {
@@ -18,14 +19,10 @@ const Tutorial = () => {
     messageClient.addListener('alert', (payload: any) => {
       alert(payload.text);
     });
-    messageClient.addListener('exitInspector', (payload: any) => {
-      // alert(payload);
-      console.log('TEST')
-    });
 
     return () => {
       messageClient.removeListener('alert');
-      messageClient.removeListener('exitInspector');
+      messageClient.removeListener('clear_inspector');
     };
   }, []);
 
@@ -36,7 +33,7 @@ const Tutorial = () => {
       <div className='menu_area'>
         <Button
           onClick={() => {
-            messageClient.postMessage('exitInspector', { 2: 2 });
+            messageClient.postMessage('clear_inspector', { 2: 2 });
           }}
         >
           <>Box</>
@@ -66,7 +63,6 @@ const Tutorial = () => {
           <NavLink to='8' className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} >
             Dude
           </NavLink>
-
         </nav>
 
       </div>

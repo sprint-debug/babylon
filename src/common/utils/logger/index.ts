@@ -76,7 +76,14 @@ class Logger {
   enable = () => (this.ENABLE_LOG = true);
   disable = () => (this.ENABLE_LOG = false);
 }
-export { Logger as default };
+
+// export { Logger as default };  // 다른 파일에서 init 할 시 사용
+export const logger = new Logger({
+  env: ENV,
+  enableLog: ENABLE_LOG,
+  enableSentry: false,
+  dsnKey: '',
+});
 
 //사용 예시
 // export const logger = new Logger({

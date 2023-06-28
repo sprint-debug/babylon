@@ -1,22 +1,20 @@
+import React from 'react';
 import SceneComponent from 'babylonjs-hook';
 import {
-  Mesh,
   Vector3,
-  Vector4,
   HemisphericLight,
   MeshBuilder,
   Scene,
   ArcRotateCamera,
   StandardMaterial,
-  Color3,
   Color4,
   Texture,
   Axis,
   Space,
-  SceneLoader,
-  DynamicTexture,
-  TransformNode
 } from '@babylonjs/core';
+import { handleSceneSwitch } from '@/pages/Tutorial/subscribeMsgEvt';
+import { messageClient } from '@/clients/events';
+import { logger } from '@/common/utils/logger';
 
 
 const onSceneReady = (scene: Scene) => {
@@ -78,11 +76,22 @@ const onSceneReady = (scene: Scene) => {
     phi += 0.01;
   })
 
+
+
+  /** scene 전환 시, inspector 종료작업 */
+  handleSceneSwitch(scene, { enableScopeInfo: true });
+
   return scene;
 }
 
 
 const MeshParentDisc = () => {
+  React.useEffect(() => {
+    return () => {
+      logger.log('cleanup tuto scene')
+      messageClient.removeListener('clear_inspector');
+    }
+  }, [])
   return (
     <SceneComponent
       antialias

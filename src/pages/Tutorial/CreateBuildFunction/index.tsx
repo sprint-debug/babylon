@@ -12,10 +12,12 @@ import {
   Color3,
   Texture,
 } from '@babylonjs/core';
+import { handleSceneSwitch } from '@/pages/Tutorial/subscribeMsgEvt';
 import { messageClient } from '@/clients/events';
+import { logger } from "@/common/utils/logger";
 
 const onSceneReady = (scene: Scene) => {
-  console.log('CreateBuildFunction')
+  logger.log('CreateBuildFunction');
 
   // debug 용
   void Promise.all([
@@ -54,14 +56,9 @@ const onSceneReady = (scene: Scene) => {
   //   }
   // };
 
-  messageClient.addListener('exitInspector', (payload: any) => {
-    // alert(payload);
-    console.log('msg Client cbf ', document.getElementById('scene-explorer-host'));
+  /** scene 전환 시, inspector 종료작업 */
+  handleSceneSwitch(scene, { enableScopeInfo: true });
 
-    scene.debugLayer.hide();
-  });
-
-  return scene;
 };
 
 /** Build Functions */
@@ -126,8 +123,8 @@ const CreateBuildFunctionScene = () => {
 
     return () => {
       // todo 이벤트 리스너 제거필요
-      console.log('cleanup CBF scene')
-      messageClient.removeListener('exitInspector');
+      logger.log('cleanup CBF scene')
+      messageClient.removeListener('clear_inspector');
     }
   }, [])
   return (

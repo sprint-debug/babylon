@@ -1,23 +1,20 @@
-import SceneComponent, { useScene } from 'babylonjs-hook';
+import React from 'react';
+import SceneComponent from 'babylonjs-hook';
 import {
-  Mesh,
   Vector3,
-  Vector4,
   HemisphericLight,
-  MeshBuilder,
   Scene,
   ArcRotateCamera,
-  StandardMaterial,
-  Color3,
-  Texture,
   SceneLoader
 } from '@babylonjs/core';
-
 // required glb imports
 import "@babylonjs/loaders/glTF";
+import { handleSceneSwitch } from '@/pages/Tutorial/subscribeMsgEvt';
+import { messageClient } from '@/clients/events';
+import { logger } from '@/common/utils/logger';
 
 const onSceneReady = (scene: Scene) => {
-  console.log('CreateMultipleInstance');
+  logger.log('CreateMultipleInstance');
   // debug 용
   void Promise.all([
     import("@babylonjs/core/Debug/debugLayer"),
@@ -45,10 +42,14 @@ const onSceneReady = (scene: Scene) => {
   /** 아래에서 불러오는 파일이 주석처리 된 파일내용을 export 한 것 */
   SceneLoader.ImportMeshAsync("", "/src/assets/ex_tutorial/", "town.glb");
 
+
+  /** scene 전환 시, inspector 종료작업 */
+  handleSceneSwitch(scene, { enableScopeInfo: true });
+
   return scene;
 };
 // const onSceneReady = (scene: Scene) => {
-//   console.log('CreateMultipleInstance')
+//   logger.log('CreateMultipleInstance')
 //   // debug 용
 //   void Promise.all([
 //     import("@babylonjs/core/Debug/debugLayer"),
@@ -179,6 +180,12 @@ const onSceneReady = (scene: Scene) => {
 
 
 const CreateMultiInstanceScene = () => {
+  React.useEffect(() => {
+    return () => {
+      logger.log('cleanup tuto scene')
+      messageClient.removeListener('clear_inspector');
+    }
+  }, [])
   return (
     <SceneComponent
       antialias
