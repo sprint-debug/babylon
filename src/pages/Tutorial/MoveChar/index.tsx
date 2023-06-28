@@ -40,7 +40,7 @@ const onSceneReady = (scene: Scene) => {
 
   const light = new HemisphericLight("light", new Vector3(1, 1, 0), scene);
 
-  SceneLoader.ImportMeshAsync("", "/src/assets/ex_tutorial/", "town.glb");
+  SceneLoader.ImportMeshAsync("", "/src/assets/ex_tutorial/", "village.glb");
   SceneLoader.ImportMeshAsync('', '/src/assets/ex_tutorial/', 'dude.babylon', scene).then((res) => {
     const dude = res.meshes[0];
     /** babylon 파일에서 texture 가 정상적으로 로딩안되어 아래와 같이 일단처리 */

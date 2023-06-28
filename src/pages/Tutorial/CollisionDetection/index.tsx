@@ -48,7 +48,7 @@ const onSceneReady = (scene: Scene) => {
   hitBox.material = wireMat;
   hitBox.position = new Vector3(3.1, 0.3, -5);
 
-  SceneLoader.ImportMeshAsync("", "/src/assets/ex_tutorial/", "town.glb");
+  SceneLoader.ImportMeshAsync("", "/src/assets/ex_tutorial/", "village.glb");
 
   let carReady = false;
   SceneLoader.ImportMeshAsync('', '/src/assets/ex_tutorial/', 'car.babylon').then(() => {

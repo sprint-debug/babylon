@@ -46,7 +46,7 @@ import { logger } from '@/common/utils/logger';
 //   const light = new HemisphericLight("light", new Vector3(1, 1, 0), scene);
 
 //   /** 아래에서 불러오는 파일이 주석처리 된 파일내용을 export 한 것 */
-//   SceneLoader.ImportMeshAsync("", "/src/assets/ex_tutorial/", "town.glb");
+//   SceneLoader.ImportMeshAsync("", "/src/assets/ex_tutorial/", "village.glb");
 
 
 //   /** scene 전환 시, inspector 종료작업 */

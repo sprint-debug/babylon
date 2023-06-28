@@ -127,33 +127,12 @@ const onSceneReady = (scene: Scene) => {
   ufo.width = 2;
   ufo.height = 1;
 
-  /** fountain section */
-  const fountainOutline = [
-    new Vector3(0, 0, 0),
-    new Vector3(0.5, 0, 0),
-    new Vector3(0.5, 0.2, 0),
-    new Vector3(0.4, 0.2, 0),
-    new Vector3(0.4, 0.05, 0),
-    new Vector3(0.05, 0.1, 0),
-    new Vector3(0.05, 0.8, 0),
-    new Vector3(0.15, 0.9, 0)
-  ]
-
-  const fountain = MeshBuilder.CreateLathe('fountain', { shape: fountainOutline, sideOrientation: Mesh.DOUBLESIDE });
-  fountain.position.x = -4;
-  fountain.position.z = -6;
-
-  /** particle section */
-  const particleSystem = new ParticleSystem('particles', 5000, scene);
-  particleSystem.particleTexture = new Texture('/src/assets/ex_tutorial/flare.png');
-
   /** scene 전환 시, inspector 종료작업 */
   handleSceneSwitch(scene, { enableScopeInfo: true });
-
 };
 
 
-const SkyScene = () => {
+const SpriteScene = () => {
 
   React.useEffect(() => {
     return () => {
@@ -171,4 +150,4 @@ const SkyScene = () => {
   );
 };
 
-export default SkyScene;
+export default SpriteScene;

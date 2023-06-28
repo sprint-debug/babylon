@@ -81,6 +81,9 @@ const Tutorial = () => {
           <NavLink to='14' className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} >
             Sprites
           </NavLink>
+          <NavLink to='15' className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} >
+            Particle
+          </NavLink>
         </nav>
 
       </div>

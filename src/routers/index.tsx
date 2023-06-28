@@ -18,7 +18,8 @@ import MoveChar from '@/pages/Tutorial/MoveChar';
 import CollisionDetection from '@/pages/Tutorial/CollisionDetection';
 import HeightMap from '@/pages/Tutorial/HeightMap';
 import Sky from '@/pages/Tutorial/Sky';
-import Trees from '@/pages/Tutorial/Sprites';
+import Sprites from '@/pages/Tutorial/Sprites';
+import Particle from '@/pages/Tutorial/Particle';
 import ProtoType from '@/pages/ProtoType';
 import Error from '@/pages/Error';
 
@@ -102,7 +103,11 @@ const router = createBrowserRouter([
           },
           {
             path: '14',
-            element: <Trees />,
+            element: <Sprites />,
+          },
+          {
+            path: '15',
+            element: <Particle />,
           },
         ]
       },
