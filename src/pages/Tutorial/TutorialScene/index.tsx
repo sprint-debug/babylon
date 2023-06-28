@@ -131,7 +131,6 @@ const PlayScene = () => {
 
   React.useEffect(() => {
     return () => {
-      logger.log('cleanup tuto scene')
       messageClient.removeListener('clear_inspector');
     }
   }, [])

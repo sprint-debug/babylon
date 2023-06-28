@@ -18,7 +18,7 @@ import { logger } from '@/common/utils/logger';
 
 
 const onSceneReady = (scene: Scene) => {
-  console.log('MeshParent')
+  logger.log('MeshParent')
   void Promise.all([
     import("@babylonjs/core/Debug/debugLayer"),
     import("@babylonjs/inspector"),

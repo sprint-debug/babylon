@@ -13,6 +13,8 @@ import MeshParentDisc from '@/pages/Tutorial/MeshParentDisc';
 import MeshParentBox from '@/pages/Tutorial/MeshParentBox';
 import Car from '@/pages/Tutorial/Car';
 import Dude from '@/pages/Tutorial/Dude';
+import MovePOV from '@/pages/Tutorial/MovePOV';
+import MoveChar from '@/pages/Tutorial/MoveChar';
 import ProtoType from '@/pages/ProtoType';
 import Error from '@/pages/Error';
 
@@ -20,7 +22,6 @@ import Error from '@/pages/Error';
 const router = createBrowserRouter([
   {
     path: '/',
-    // element: <Navigate to='/tutorial' replace />,
     element: <App />,
     // with this data loaded before rendering
     // loader: async ({ request, params }) => {
@@ -74,6 +75,14 @@ const router = createBrowserRouter([
           {
             path: '8',
             element: <Dude />,
+          },
+          {
+            path: '9',
+            element: <MovePOV />,
+          },
+          {
+            path: '10',
+            element: <MoveChar />,
           },
         ]
       },

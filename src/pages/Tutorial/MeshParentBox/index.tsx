@@ -19,7 +19,7 @@ import { logger } from '@/common/utils/logger';
 
 
 const onSceneReady = (scene: Scene) => {
-  console.log('MeshParent')
+  logger.log('MeshParent')
   void Promise.all([
     import("@babylonjs/core/Debug/debugLayer"),
     import("@babylonjs/inspector"),
@@ -183,7 +183,6 @@ const localAxes = (size: number) => {
 const MeshParentBox = () => {
   React.useEffect(() => {
     return () => {
-      logger.log('cleanup tuto scene')
       messageClient.removeListener('clear_inspector');
     }
   }, [])

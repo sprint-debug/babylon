@@ -1,8 +1,8 @@
 import React from 'react';
-import { Outlet, NavLink } from 'react-router-dom';
 import { messageClient } from '@/clients/events';
-import { logger } from '@/common/utils/logger';
 import Button from '@/components/Button';
+import { Outlet, NavLink } from 'react-router-dom';
+import { logger } from '@/common/utils/logger';
 import Text from '@/components/Text';
 import FixedView from '../_shared/Layouts/FixedView';
 import './style.scss';
@@ -62,6 +62,12 @@ const Tutorial = () => {
           </NavLink>
           <NavLink to='8' className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} >
             Dude
+          </NavLink>
+          <NavLink to='9' className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} >
+            MovePOV
+          </NavLink>
+          <NavLink to='10' className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} >
+            MoveChar
           </NavLink>
         </nav>
 
