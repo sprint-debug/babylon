@@ -18,7 +18,9 @@ import {
     SpriteManager,
     Sprite,
     Mesh,
-    ParticleSystem
+    ParticleSystem,
+    Color4,
+    PointerEventTypes
 } from '@babylonjs/core';
 import { handleSceneSwitch } from '@/pages/Tutorial/subscribeMsgEvt';
 import { messageClient } from '@/clients/events';
@@ -127,6 +129,27 @@ const onSceneReady = (scene: Scene) => {
     ufo.width = 2;
     ufo.height = 1;
 
+    let switched = false;
+    const pointerDown = (mesh) => {
+        logger.log('pointerDOWN ', mesh)
+        if (mesh === fountain) {
+            switched = !switched;
+            if (switched) particleSystem.start();
+            else particleSystem.stop();
+        }
+    }
+
+    scene.onPointerObservable.add((pointerInfo) => {
+        switch (pointerInfo.type) {
+            case PointerEventTypes.POINTERDOWN:
+                if (pointerInfo.pickInfo.hit) {
+                    pointerDown(pointerInfo.pickInfo?.pickedMesh);
+                }
+                break;
+        }
+    });
+
+
     /** fountain section */
     const fountainOutline = [
         new Vector3(0, 0, 0),
@@ -145,7 +168,46 @@ const onSceneReady = (scene: Scene) => {
 
     /** particle section */
     const particleSystem = new ParticleSystem('particles', 5000, scene);
+    // particle texture
     particleSystem.particleTexture = new Texture('/src/assets/ex_tutorial/flare.png');
+    // particle direction
+    particleSystem.emitter = new Vector3(-4, 0.8, -6);
+    particleSystem.minEmitBox = new Vector3(-0.01, 0, -0.01);
+    particleSystem.maxEmitBox = new Vector3(0.01, 0, 0.01);
+    // particle color
+    particleSystem.color1 = new Color4(0.7, 0.8, 1.0, 1.0);
+    particleSystem.color2 = new Color4(0.2, 0.5, 1.0, 1.0);
+    // particle size, random between
+    particleSystem.minSize = 0.01;
+    particleSystem.maxSize = 0.05;
+    // particle life time, random between
+    particleSystem.minLifeTime = 0.01;
+    particleSystem.maxLifeTime = 0.05;
+    // emission rate;
+    particleSystem.emitRate = 1500;
+    // BlendMode. oneone or standard
+    particleSystem.blendMode = ParticleSystem.BLENDMODE_ONEONE;
+    // set particle gravity
+    particleSystem.gravity = new Vector3(0, -9.81, 0);
+    // particle direction after emitted
+    particleSystem.direction1 = new Vector3(-1, 8, 1);
+    particleSystem.direction2 = new Vector3(1, 8, 1);
+
+    // Power and speed
+    particleSystem.minEmitPower = 0.2;
+    particleSystem.maxEmitPower = 0.6;
+    particleSystem.updateSpeed = 0.01;
+
+
+
+
+
+
+
+
+
+
+
 
     /** scene 전환 시, inspector 종료작업 */
     handleSceneSwitch(scene, { enableScopeInfo: true });

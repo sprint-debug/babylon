@@ -10,15 +10,10 @@ import {
   MeshBuilder,
   Scene,
   ArcRotateCamera,
-  Axis,
-  Space,
-  Tools,
   CubeTexture,
   Color3,
   SpriteManager,
   Sprite,
-  Mesh,
-  ParticleSystem
 } from '@babylonjs/core';
 import { handleSceneSwitch } from '@/pages/Tutorial/subscribeMsgEvt';
 import { messageClient } from '@/clients/events';
