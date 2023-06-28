@@ -73,7 +73,13 @@ const Tutorial = () => {
             CollisionDetection
           </NavLink>
           <NavLink to='12' className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} >
-            MoveChar
+            HeightMap
+          </NavLink>
+          <NavLink to='13' className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} >
+            SkiesAbove
+          </NavLink>
+          <NavLink to='14' className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} >
+            Sprites
           </NavLink>
         </nav>
 

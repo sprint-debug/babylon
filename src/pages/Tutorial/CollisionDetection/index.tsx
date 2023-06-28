@@ -43,7 +43,7 @@ const onSceneReady = (scene: Scene) => {
 
 
   const wireMat = new StandardMaterial('wireMat');
-  wireMat.wireframe = true;
+  wireMat.wireframe = true; // 와이어프레임
   const hitBox = MeshBuilder.CreateBox('carbox', { width: 0.5, height: 0.6, depth: 4.5 });
   hitBox.material = wireMat;
   hitBox.position = new Vector3(3.1, 0.3, -5);
