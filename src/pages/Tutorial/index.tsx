@@ -90,6 +90,12 @@ const Tutorial = () => {
           <NavLink to='17' className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} >
             StreetLight&GUI
           </NavLink>
+          <NavLink to='18' className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} >
+            Shadow
+          </NavLink>
+          <NavLink to='19' className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} >
+            CameraParent
+          </NavLink>
         </nav>
 
       </div>

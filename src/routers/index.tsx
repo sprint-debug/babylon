@@ -22,6 +22,8 @@ import Sprites from '@/pages/Tutorial/Sprites';
 import Particle from '@/pages/Tutorial/Particle';
 import Lamp from '@/pages/Tutorial/Lamp';
 import StreetLight from '@/pages/Tutorial/StreetLight';
+import Shadow from '@/pages/Tutorial/Shadow';
+import CameraParent from '@/pages/Tutorial/CameraParent';
 import ProtoType from '@/pages/ProtoType';
 import Error from '@/pages/Error';
 
@@ -60,6 +62,8 @@ const router = createBrowserRouter([
           { path: '15', element: <Particle /> },
           { path: '16', element: <Lamp /> },
           { path: '17', element: <StreetLight /> },
+          { path: '18', element: <Shadow /> },
+          { path: '19', element: <CameraParent /> },
         ]
       },
       // {
