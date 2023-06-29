@@ -181,21 +181,21 @@ const onSceneReady = (scene: Scene) => {
     particleSystem.minSize = 0.01;
     particleSystem.maxSize = 0.05;
     // particle life time, random between
-    particleSystem.minLifeTime = 0.01;
-    particleSystem.maxLifeTime = 0.05;
+    particleSystem.minLifeTime = 1;
+    particleSystem.maxLifeTime = 3;
     // emission rate;
     particleSystem.emitRate = 1500;
     // BlendMode. oneone or standard
     particleSystem.blendMode = ParticleSystem.BLENDMODE_ONEONE;
     // set particle gravity
-    particleSystem.gravity = new Vector3(0, -9.81, 0);
+    particleSystem.gravity = new Vector3(0, -100.81, 0);
     // particle direction after emitted
     particleSystem.direction1 = new Vector3(-1, 8, 1);
     particleSystem.direction2 = new Vector3(1, 8, 1);
 
     // Power and speed
-    particleSystem.minEmitPower = 0.2;
-    particleSystem.maxEmitPower = 0.6;
+    particleSystem.minEmitPower = 1;
+    particleSystem.maxEmitPower = 5;
     particleSystem.updateSpeed = 0.01;
 
 

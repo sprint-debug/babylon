@@ -20,6 +20,8 @@ import HeightMap from '@/pages/Tutorial/HeightMap';
 import Sky from '@/pages/Tutorial/Sky';
 import Sprites from '@/pages/Tutorial/Sprites';
 import Particle from '@/pages/Tutorial/Particle';
+import Lamp from '@/pages/Tutorial/Lamp';
+import StreetLight from '@/pages/Tutorial/StreetLight';
 import ProtoType from '@/pages/ProtoType';
 import Error from '@/pages/Error';
 
@@ -36,81 +38,34 @@ const router = createBrowserRouter([
     //   );
     // },
     children: [
+      { index: true, element: <Init /> },
       {
-        index: true,
-        element: <Init />,
+        path: 'tutorial',
+        element: <TutorialMenu />,
+        children: [
+          { path: '1', element: <Tutorial />, children: [] },
+          { path: '2', element: <CBF /> },
+          { path: '3', element: <CMI /> },
+          { path: '4', element: <WAL /> },
+          { path: '5', element: <MeshParentDisc /> },
+          { path: '6', element: <MeshParentBox /> },
+          { path: '7', element: <Car /> },
+          { path: '8', element: <Dude /> },
+          { path: '9', element: <MovePOV /> },
+          { path: '10', element: <MoveChar /> },
+          { path: '11', element: <CollisionDetection /> },
+          { path: '12', element: <HeightMap /> },
+          { path: '13', element: <Sky /> },
+          { path: '14', element: <Sprites /> },
+          { path: '15', element: <Particle /> },
+          { path: '16', element: <Lamp /> },
+          { path: '17', element: <StreetLight /> },
+        ]
       },
       // {
       //   path: 'login',
       //   element: <Login />,
       // },
-      {
-        path: 'tutorial',
-        element: <TutorialMenu />,
-        children: [
-          {
-            path: '1',
-            element: <Tutorial />,
-            // children: []
-          },
-          {
-            path: '2',
-            element: <CBF />
-          },
-          {
-            path: '3',
-            element: <CMI />,
-          },
-          {
-            path: '4',
-            element: <WAL />,
-          },
-          {
-            path: '5',
-            element: <MeshParentDisc />,
-          },
-          {
-            path: '6',
-            element: <MeshParentBox />,
-          },
-          {
-            path: '7',
-            element: <Car />,
-          },
-          {
-            path: '8',
-            element: <Dude />,
-          },
-          {
-            path: '9',
-            element: <MovePOV />,
-          },
-          {
-            path: '10',
-            element: <MoveChar />,
-          },
-          {
-            path: '11',
-            element: <CollisionDetection />,
-          },
-          {
-            path: '12',
-            element: <HeightMap />,
-          },
-          {
-            path: '13',
-            element: <Sky />,
-          },
-          {
-            path: '14',
-            element: <Sprites />,
-          },
-          {
-            path: '15',
-            element: <Particle />,
-          },
-        ]
-      },
     ],
     errorElement: <Error />,
   },
