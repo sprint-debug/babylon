@@ -24,6 +24,7 @@ import Lamp from '@/pages/Tutorial/Lamp';
 import StreetLight from '@/pages/Tutorial/StreetLight';
 import Shadow from '@/pages/Tutorial/Shadow';
 import CameraParent from '@/pages/Tutorial/CameraParent';
+import Practice from '@/pages/Practice';
 import ProtoType from '@/pages/ProtoType';
 import Error from '@/pages/Error';
 
@@ -66,10 +67,10 @@ const router = createBrowserRouter([
           { path: '19', element: <CameraParent /> },
         ]
       },
-      // {
-      //   path: 'login',
-      //   element: <Login />,
-      // },
+      {
+        path: 'practice',
+        element: <Practice />,
+      },
     ],
     errorElement: <Error />,
   },
