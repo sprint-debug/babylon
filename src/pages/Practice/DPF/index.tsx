@@ -8,6 +8,8 @@ import {
   Vector3,
   MeshBuilder,
   FollowCamera,
+  ArcFollowCamera,
+  FreeCamera,
   ActionManager,
   ExecuteCodeAction
 } from '@babylonjs/core';
@@ -34,52 +36,53 @@ const onSceneReady = (scene: Scene) => {
   canvas!.height = 800;
   canvas!.width = 1000;
 
-  let camPos = new Vector3();
-  const camera = new ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 50, new Vector3(0, 2, 0), scene);
-  camera.upperBetaLimit = Math.PI / 2.5;
-  camera.attachControl(canvas, true)
-
-  const updateCamPos = () => {
-    camera.position.x += 1
-  }
-
-  // Camera
-  // let camera = new FollowCamera("FollowCam", new Vector3(0, 10, 0), scene);
-
-  // camera.radius = 25; // how far from the object to follow
-  // camera.heightOffset = 3; // how high above the object to place the camera
-  // camera.rotationOffset = 90; // the viewing angle
-  // camera.cameraAcceleration = 0; // how fast to move
-  // camera.maxCameraSpeed = 20; // speed limit
-  // camera.attachControl(canvas, true);
-
-  //camera.target = player;
-  // camera.lockedTarget = player; // target any mesh or object with a "position" Vector3
-
-  scene.activeCamera = camera;
-
   const light = new HemisphericLight("light", new Vector3(0, 50, 0), scene);
   light.intensity = 0.6;
+
+  // let camPos = new Vector3();
+  // const camera = new ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 50, new Vector3(0, 2, 0), scene);
+  // camera.upperBetaLimit = Math.PI / 2.5;
+  // camera.attachControl(canvas, true)
+
+  /** 기본이동 시 축이 어긋남, 맞추려면 해당 보정도 같이해주거나, ground 자체를 회전시켜야함 */
+  // const freeCam = new FreeCamera("freeCam", new Vector3(0, 25, 0), scene);
+  // freeCam.attachControl(canvas, true);
+  // freeCam.inputs.removeMouse();
+  // freeCam.rotation.x = 0.6;
+  // scene.activeCamera = freeCam;
+  const cameraPointer = MeshBuilder.CreateBox('cameraPointer', { size: 1 }, scene);
+  cameraPointer.position = Vector3.Zero();
+  // followCam.lockedTarget = cameraPointer;
+
+  const followCam = new ArcFollowCamera('followCam', -Math.PI / 2, Math.PI / 2.5, 50, cameraPointer, scene);
+  followCam.radius = 30;
+  // followCam.heightOffset = 10;
+  // followCam.rotationOffset = 0;
+  // followCam.cameraAcceleration = 0.005;
+  // followCam.maxCameraSpeed = 10;
+  // followCam.attachControl(canvas, true);
+
+
+
 
   const basicGround = MeshBuilder.CreateGround('basicGround', { width: 200, height: 200 });
   // ground.checkCollisions = true;
   basicGround.rotation.y = Math.PI / 4;
   basicGround.material = new GridMaterial("basicGroundMat", scene);
 
-  scene.actionManager = new ActionManager(scene);
-  scene.actionManager.registerAction(
-    new ExecuteCodeAction(
-      {
-        trigger: ActionManager.OnKeyDownTrigger,
-        parameter: 'a'
-      },
-      () => {
-        logger.log('a pressed')
-        updateCamPos()
-        // camera.position.x += 1
-      }
-    )
-  );
+  // scene.actionManager = new ActionManager(scene);
+  // scene.actionManager.registerAction(
+  //   new ExecuteCodeAction(
+  //     {
+  //       trigger: ActionManager.OnKeyDownTrigger,
+  //       parameter: 'a'
+  //     },
+  //     () => {
+  //       logger.log('a pressed')
+  //       // camera.position.x += 1
+  //     }
+  //   )
+  // );
 
 
   scene.registerBeforeRender(() => {
