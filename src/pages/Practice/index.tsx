@@ -5,7 +5,7 @@ import { Outlet, NavLink } from 'react-router-dom';
 import { logger } from '@/common/utils/logger';
 import Text from '@/components/Text';
 import FixedView from '../_shared/Layouts/FixedView';
-// import './style.scss';
+import './style.scss';
 
 const Practice = () => {
 

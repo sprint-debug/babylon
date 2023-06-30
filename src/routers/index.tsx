@@ -25,6 +25,7 @@ import StreetLight from '@/pages/Tutorial/StreetLight';
 import Shadow from '@/pages/Tutorial/Shadow';
 import CameraParent from '@/pages/Tutorial/CameraParent';
 import Practice from '@/pages/Practice';
+import DPF from '@/pages/Practice/DPF';
 import ProtoType from '@/pages/ProtoType';
 import Error from '@/pages/Error';
 
@@ -45,6 +46,9 @@ const router = createBrowserRouter([
       {
         path: 'practice',
         element: <Practice />,
+        children: [
+          { path: '1', element: <DPF /> },
+        ]
       },
       {
         path: 'tutorial',

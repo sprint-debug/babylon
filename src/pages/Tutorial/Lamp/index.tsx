@@ -1,26 +1,14 @@
 import React from 'react';
 import SceneComponent from 'babylonjs-hook';
 import {
-  SceneLoader,
-  Animation,
   StandardMaterial,
-  Texture,
   Vector3,
   HemisphericLight,
   MeshBuilder,
   Scene,
   ArcRotateCamera,
-  Axis,
-  Space,
-  Tools,
-  CubeTexture,
   Color3,
-  SpriteManager,
-  Sprite,
   Mesh,
-  ParticleSystem,
-  Color4,
-  PointerEventTypes,
   SpotLight
 } from '@babylonjs/core';
 import { handleSceneSwitch } from '@/pages/Tutorial/subscribeMsgEvt';
