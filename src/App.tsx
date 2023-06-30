@@ -5,6 +5,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import localeKO from '@/common/locale/ko.json';
 import { getBrowserLanguage } from '@/common/utils/getBrowserLanguage';
+import Globalstyles from '@/common/styles/GlobalStyles';
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => {
   console.log('APP.tsx loaded');
   return (
     <QueryClientProvider client={queryClient}>
+      <Globalstyles />
       <Outlet />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

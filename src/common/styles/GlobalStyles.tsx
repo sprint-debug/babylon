@@ -4,10 +4,8 @@ import './font.scss';
 
 const GlobalStyles = createGlobalStyle`
 ${reset};
-
-button{
-  border:none;
-  background: none;
+body {
+  margin: 0px;
 }
 
 `;

@@ -1,6 +1,8 @@
 .container {
   display: flex;
   flex-direction: row;
+  height: 100vh;
+  background-color: rgb(86, 76, 94);
 }
 
 .menu_area {
@@ -16,6 +18,10 @@
   flex-direction: column;
 }
 
+.sidebar a {
+  color: rgb(255, 229, 229)
+}
+
 #sidebar a.active {
-  color: red;
+  color: rgb(130, 233, 147);
 }

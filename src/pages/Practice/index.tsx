@@ -40,7 +40,7 @@ const Practice = () => {
                 </Button>
                 <nav id='sidebar' onClick={handleSceneSwitch} className='sidebar'>
                     <NavLink to='1' className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} >
-                        test
+                        scene01
                     </NavLink>
                 </nav>
 

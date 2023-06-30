@@ -1,8 +1,60 @@
-.spinner_container {
+.main-container {
     display: flex;
     justify-content: center;
-    /* Horizontal center */
     align-items: center;
-    /* Vertical center */
-    height: 80vh;
+    height: 100vh;
+    background-color: rgb(107, 50, 150);
+}
+
+.spinner-container {
+    position: relative;
+    text-align: center;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.btn-main {
+    display: inline-block;
+    height: 60px;
+    padding: 15px 30px;
+    font-size: 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #F8F8F8;
+    background-image: linear-gradient(to bottom right, #9E7CC1, #7238B6);
+    border: 2px solid #7238B6;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    /* Initially set opacity to 0 */
+    opacity: 0;
+    animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.btn-main:hover {
+    background-image: linear-gradient(to bottom right, #7238B6, #9E7CC1);
+    cursor: pointer;
+}
+
+.button:active {
+    background-color: #2d0f50;
+    /* Update the background color */
+    border-color: #100b14;
+    /* Update the border color */
+    /* Add any additional styles for the active state */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }

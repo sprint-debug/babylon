@@ -5,8 +5,9 @@ import Spinner from '@/components/Spinner';
 import './style.scss';
 
 const Init = () => {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = React.useState(false);
   // const { mutationAuthSignupEmail } = useAuthAPI();
-
   // const autoSignin = async () => {
   //   await mutationAuthSignupEmail.mutateAsync({
   //     data: {
@@ -18,23 +19,34 @@ const Init = () => {
   //   });
   // };
 
-  const navigate = useNavigate();
+  const routePage = (path: string) => () => {
+    navigate(path);
+  }
+
 
   React.useEffect(() => {
     // autoSignin();
     setTimeout(() => {
-      navigate('/tutorial');
-    }, 1000)
+      // navigate('/tutorial');
+      setIsLoading(true);
+    }, 500)
   }, []);
 
   /** todo : 초기화 작업 */
 
   return (
-    <React.Fragment>
-      <div className="spinner_container">
-        <Spinner />
-      </div>
-    </React.Fragment>
+    <main className="main-container">
+
+      {isLoading ?
+        <div className='btn-container '>
+          <button onClick={routePage('/practice')} className="btn-main">Practice</button>
+          <button onClick={routePage('/tutorial')} className="btn-main">Go to Basic Tutorials</button>
+        </div>
+        : <div className="spinner-container">
+          <Spinner />
+        </div>
+      }
+    </main>
   );
 };
 

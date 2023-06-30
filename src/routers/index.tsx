@@ -43,6 +43,10 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Init /> },
       {
+        path: 'practice',
+        element: <Practice />,
+      },
+      {
         path: 'tutorial',
         element: <TutorialMenu />,
         children: [
@@ -67,10 +71,7 @@ const router = createBrowserRouter([
           { path: '19', element: <CameraParent /> },
         ]
       },
-      {
-        path: 'practice',
-        element: <Practice />,
-      },
+
     ],
     errorElement: <Error />,
   },

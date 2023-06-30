@@ -38,7 +38,7 @@ const Tutorial = () => {
         >
           <>Box</>
         </Button>
-        <nav id='sidebar' onClick={handleSceneSwitch} className='sidebar'>
+        <nav onClick={handleSceneSwitch} id='sidebar' className='sidebar'>
           <NavLink to='1' className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} >
             first example
           </NavLink>
