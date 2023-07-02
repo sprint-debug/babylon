@@ -96,6 +96,9 @@ const Tutorial = () => {
           <NavLink to='19' className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} >
             CameraParent
           </NavLink>
+          <NavLink to='20' className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} >
+            CameraController
+          </NavLink>
         </nav>
 
       </div>
