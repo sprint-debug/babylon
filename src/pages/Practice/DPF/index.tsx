@@ -21,8 +21,8 @@ import { GridMaterial } from '@babylonjs/materials';
 import { handleSceneSwitch } from '@/pages/Tutorial/subscribeMsgEvt';
 import { messageClient } from '@/clients/events';
 import { logger } from '@/common/utils/logger';
-import { FreeCameraKeyboardWalkInput } from '@/clients/util/CustomInputController';
-import { FreeCameraKeyboardWalkInput2 } from '@/clients/util/CustomInputController2';
+import { CustomInputController } from '@/clients/util/CustomInputController';
+import { InputTypeEnum } from '@/clients/util/CustomInputControllerType';
 
 const onSceneReady = (scene: Scene) => {
   // debug 용
@@ -53,21 +53,12 @@ const onSceneReady = (scene: Scene) => {
   /** 기본이동 시 축이 어긋남, 맞추려면 해당 보정도 같이해주거나, ground 자체를 회전시켜야함 */
   const freeCam = new FreeCamera("freeCam", new Vector3(0, 30, 0), scene);
   freeCam.attachControl(canvas, true);
-  freeCam.inputs.removeMouse();
-
-  // freeCam.mode = Camera.ORTHOGRAPHIC_CAMERA;
-  // freeCam.orthoTop = 100; // Set the top orthographic value
-  // freeCam.orthoBottom = -100; // Set the bottom orthographic value
-  // freeCam.orthoLeft = -100; // Set the left orthographic value
-  // freeCam.orthoRight = 100; // Set the right orthographic value
+  // freeCam.inputs.removeMouse()
 
 
   scene.activeCamera = freeCam;
   freeCam.inputs.removeByType("FreeCameraKeyboardMoveInput");
-  freeCam.inputs.add(new FreeCameraKeyboardWalkInput());
-
-
-  // freeCam.cameraRotation = new Vector2(0.1, 0);
+  freeCam.inputs.add(new CustomInputController({ inputType: InputTypeEnum.WASD, enablePreventDefault: false }));
   // freeCam.setTarget(new Vector3(0, -0.0001, 1));
 
   //65 l 68 r 83 b 87 f
@@ -75,9 +66,10 @@ const onSceneReady = (scene: Scene) => {
   cameraPointer.position = new Vector3(0, -0.0001, 1);
   // freeCam.lockedTarget = cameraPointer;
 
-  // window.addEventListener("keydown", function (event) {
-  //   canvas!.focus();
-  // })
+  /** 키보드 입력 시 canvas 에 포커싱하여 불필요한 브라우져 액션 차단 */
+  window.addEventListener("keydown", function (event) {
+    canvas!.focus();
+  })
   // scene.onKeyboardObservable.add((kbEvt) => {
   //   console.log(kbEvt.type, kbEvt.event)
   //   if (kbEvt.type > 1) return;

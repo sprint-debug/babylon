@@ -24,7 +24,8 @@ import { GridMaterial } from '@babylonjs/materials';
 import { handleSceneSwitch } from '@/pages/Tutorial/subscribeMsgEvt';
 import { messageClient } from '@/clients/events';
 import { logger } from '@/common/utils/logger';
-import { FreeCameraKeyboardWalkInput2 } from '@/clients/util/CustomInputController2';
+import { CustomInputController } from '@/clients/util/CustomInputController';
+import { InputTypeEnum } from '@/clients/util/CustomInputControllerType';
 
 //https://playground.babylonjs.com/#CTCSWQ
 
@@ -75,7 +76,7 @@ const onSceneReady = (scene: Scene) => {
     //First remove the default management.
     camera.inputs.removeByType("FreeCameraKeyboardMoveInput");
     camera.inputs.removeByType("FreeCameraMouseInput");
-    camera.inputs.add(new FreeCameraKeyboardWalkInput2());
+    camera.inputs.add(new CustomInputController({ inputType: InputTypeEnum.WASD, enablePreventDefault: false }));
 
     //Add two viewports
     camera.viewport = new Viewport(0, 0.5, 1.0, 0.5);
