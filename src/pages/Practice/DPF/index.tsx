@@ -15,13 +15,16 @@ import {
   Tools,
   UniversalCamera,
   Camera,
-  Vector2
+  Viewport,
+  StandardMaterial,
+  Color3,
 } from '@babylonjs/core';
 import { GridMaterial } from '@babylonjs/materials';
 import { handleSceneSwitch } from '@/pages/Tutorial/subscribeMsgEvt';
 import { messageClient } from '@/clients/events';
 import { logger } from '@/common/utils/logger';
 import { CustomInputController } from '@/clients/util/CustomInputController';
+import { IsometricCamera } from '@/clients/util/IsometricCamera';
 import { InputTypeEnum } from '@/clients/util/CustomInputControllerType';
 
 const onSceneReady = (scene: Scene) => {
@@ -45,102 +48,104 @@ const onSceneReady = (scene: Scene) => {
   const light = new HemisphericLight("light", new Vector3(0, 50, 0), scene);
   light.intensity = 0.6;
 
-  // let camPos = new Vector3();
-  // const camera = new ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 50, new Vector3(0, 2, 0), scene);
-  // camera.upperBetaLimit = Math.PI / 2.5;
-  // camera.attachControl(canvas, true)
 
-  /** 기본이동 시 축이 어긋남, 맞추려면 해당 보정도 같이해주거나, ground 자체를 회전시켜야함 */
-  const freeCam = new FreeCamera("freeCam", new Vector3(0, 30, 0), scene);
-  freeCam.attachControl(canvas, true);
-  // freeCam.inputs.removeMouse()
+  let camera = new UniversalCamera("MyCamera", new Vector3(0, 1, 0), scene);
+  camera.minZ = 0.0001;
+  camera.attachControl(canvas, true);
+  camera.speed = 0.02;
+
+  // camera.inputs.removeByType("FreeCameraKeyboardMoveInput");
+  // camera.inputs.removeByType("FreeCameraMouseInput");
+  // camera.inputs.add(new IsometricCamera({ inputType: InputTypeEnum.WASD, enablePreventDefault: false }));
+
+  // Add viewCamera that gives first person shooter view
+  let viewCamera = new UniversalCamera("viewCamera", new Vector3(0, 3, -3), scene);
+  viewCamera.attachControl(canvas, true);
+  viewCamera.minZ = 0.0001;
+  viewCamera.speed = 0.02;
+  viewCamera.parent = cone;
+  viewCamera.setTarget(new Vector3(0, -0.0001, 1));
+
+  scene.activeCameras!.push(viewCamera);
+  // scene.activeCameras!.push(camera);
+
+  viewCamera.inputs.removeByType("FreeCameraKeyboardMoveInput");
+  viewCamera.inputs.removeByType("FreeCameraMouseInput");
+  viewCamera.inputs.add(new IsometricCamera({ inputType: InputTypeEnum.WASD, enablePreventDefault: false }));
+
+  //First remove the default management.
+
+  // camera.inputs.add(new CustomInputController({ inputType: InputTypeEnum.WASD, enablePreventDefault: false }));
 
 
-  scene.activeCamera = freeCam;
-  freeCam.inputs.removeByType("FreeCameraKeyboardMoveInput");
-  freeCam.inputs.add(new CustomInputController({ inputType: InputTypeEnum.WASD, enablePreventDefault: false }));
-  // freeCam.setTarget(new Vector3(0, -0.0001, 1));
 
-  //65 l 68 r 83 b 87 f
-  const cameraPointer = MeshBuilder.CreateBox('cameraPointer', { size: 1 }, scene);
-  cameraPointer.position = new Vector3(0, -0.0001, 1);
-  // freeCam.lockedTarget = cameraPointer;
+  let cone = MeshBuilder.CreateCylinder("dummyCamera", { diameterTop: 0.01, diameterBottom: 0.2, height: 0.2 }, scene);
+  cone.parent = camera;
+  cone.rotation.x = Math.PI / 2;
+
+  let randomNumber = function (min: number, max: number) {
+    if (min == max) {
+      return (min);
+    }
+    let random = Math.random();
+    return ((random * (max - min)) + min);
+  };
+
+  let box = MeshBuilder.CreateBox("crate", { size: 2 }, scene);
+  box.material = new StandardMaterial("Mat", scene);
+  box.checkCollisions = true;
+
+  let boxNb = 6;
+  let theta = 0;
+  let radius = 6;
+  box.position = new Vector3((radius + randomNumber(-0.5 * radius, 0.5 * radius)) * Math.cos(theta + randomNumber(-0.1 * theta, 0.1 * theta)), 1, (radius + randomNumber(-0.5 * radius, 0.5 * radius)) * Math.sin(theta + randomNumber(-0.1 * theta, 0.1 * theta)));
+
+  let boxes = [box];
+  for (let i = 1; i < boxNb; i++) {
+    theta += 2 * Math.PI / boxNb;
+    let newBox = box.clone("box" + i);
+    boxes.push(newBox);
+    newBox.position = new Vector3((radius + randomNumber(-0.5 * radius, 0.5 * radius)) * Math.cos(theta + randomNumber(-0.1 * theta, 0.1 * theta)), 1, (radius + randomNumber(-0.5 * radius, 0.5 * radius)) * Math.sin(theta + randomNumber(-0.1 * theta, 0.1 * theta)));
+  }
+
+  // scene.gravity = new Vector3(0, -0.9, 0);
+  scene.collisionsEnabled = true;
+
+  camera.checkCollisions = true;
+  // camera.applyGravity = true;
+  camera.ellipsoid = new Vector3(0.5, 1, 0.5);
+  camera.ellipsoidOffset = new Vector3(0, 1, 0);
+
+  //Create Visible Ellipsoid around camera
+  let a = 0.5;
+  let b = 1;
+  let points = [];
+  for (let theta = -Math.PI / 2; theta < Math.PI / 2; theta += Math.PI / 36) {
+    points.push(new Vector3(0, b * Math.sin(theta), a * Math.cos(theta)));
+  }
+
+  let ellipse = [];
+  ellipse[0] = MeshBuilder.CreateLines("e", { points: points }, scene);
+  ellipse[0].color = Color3.Red();
+  ellipse[0].parent = camera;
+  ellipse[0].rotation.y = 5 * Math.PI / 16;
+  for (let i = 1; i < 23; i++) {
+    ellipse[i] = ellipse[0].clone("el" + i);
+    ellipse[i].parent = camera;
+    ellipse[i].rotation.y = 5 * Math.PI / 16 + i * Math.PI / 16;
+  }
+
+  const basicGround = MeshBuilder.CreateGround('basicGround', { width: 200, height: 200 });
+  basicGround.rotation.y = Math.PI / 4;
+  basicGround.material = new GridMaterial("basicGroundMat", scene);
+
+  basicGround.checkCollisions = true;
+
 
   /** 키보드 입력 시 canvas 에 포커싱하여 불필요한 브라우져 액션 차단 */
   window.addEventListener("keydown", function (event) {
     canvas!.focus();
   })
-  // scene.onKeyboardObservable.add((kbEvt) => {
-  //   console.log(kbEvt.type, kbEvt.event)
-  //   if (kbEvt.type > 1) return;
-  //   switch (kbEvt.event.key) {
-  //     case 'w':
-  //       logger.log('w')
-  //       // freeCam.m
-  //       cameraPointer.movePOV(0.1, 0, 0);
-  //       break;
-  //     case 'a':
-  //       logger.log('a')
-  //       break;
-  //     case 's':
-  //       logger.log('s')
-  //       break;
-  //     case 'd':
-  //       logger.log('d')
-  //       break;
-
-  //     default:
-  //       break;
-  //   }
-  // })
-
-  const basicGround = MeshBuilder.CreateGround('basicGround', { width: 200, height: 200 });
-  // ground.checkCollisions = true;
-  basicGround.rotation.y = Math.PI / 4;
-  basicGround.material = new GridMaterial("basicGroundMat", scene);
-
-
-
-
-  // const FreeCamKbInput = () => {
-  //   // let _keys = [];
-  //   keyLeft = [65];
-  //   keyRight = [68];
-  //   keyFront = [83];
-  //   keyBack = [87];
-  //   sensibility = 0.01;
-  // }
-  // FreeCamKbInput.prototype.attachControl = (noPreventDefault: boolean) => {
-  //   let engine = freeCam.getEngine();
-  //   let element = engine.getInputElement();
-  //   const _onKeyDown = (evt) => {
-  //     if (keyLeft.indexOf(evt.keyCode) !== -1 ||
-  //       keyRight.indexOf(evt.keyCode) !== -1) {
-  //       var index = _keys.indexOf(evt.keyCode);
-  //       if (index === -1) {
-  //         _this._keys.push(evt.keyCode);
-  //       }
-  //       if (!noPreventDefault) {
-  //         evt.preventDefault();
-  //       }
-  //     }
-  //   };
-  //   const _onKeyUp = function (evt) {
-  //     if (_this.keysLeft.indexOf(evt.keyCode) !== -1 ||
-  //       _this.keysRight.indexOf(evt.keyCode) !== -1) {
-  //       var index = _this._keys.indexOf(evt.keyCode);
-  //       if (index >= 0) {
-  //         _this._keys.splice(index, 1);
-  //       }
-  //       if (!noPreventDefault) {
-  //         evt.preventDefault();
-  //       }
-  //     }
-  //   };
-
-  // }
-
-
 
   /** scene 전환 시, inspector 종료작업 */
   handleSceneSwitch(scene, { enableScopeInfo: true });

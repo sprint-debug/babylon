@@ -2,22 +2,12 @@ import React from 'react';
 import SceneComponent from 'babylonjs-hook';
 import {
     Scene,
-    SceneLoader,
-    ArcRotateCamera,
     HemisphericLight,
     Vector3,
     MeshBuilder,
-    FollowCamera,
-    ArcFollowCamera,
-    FreeCamera,
-    ActionManager,
-    ExecuteCodeAction,
-    Tools,
     UniversalCamera,
-    Camera,
     Viewport,
     StandardMaterial,
-    Texture,
     Color3
 } from '@babylonjs/core';
 import { GridMaterial } from '@babylonjs/materials';
@@ -61,9 +51,6 @@ const onSceneReady = (scene: Scene) => {
     camera.minZ = 0.0001;
     camera.attachControl(canvas, true);
     camera.speed = 0.02;
-    // camera.angularSpeed = 0.05;
-    // camera.angle = Math.PI/2;
-    // camera.direction = new Vector3(Math.cos(camera.angle), 0, Math.sin(camera.angle));
 
     // Add viewCamera that gives first person shooter view
     let viewCamera = new UniversalCamera("viewCamera", new Vector3(0, 3, -3), scene);
@@ -86,27 +73,27 @@ const onSceneReady = (scene: Scene) => {
     cone.parent = camera;
     cone.rotation.x = Math.PI / 2;
 
-    var randomNumber = function (min: number, max: number) {
+    let randomNumber = function (min: number, max: number) {
         if (min == max) {
             return (min);
         }
-        var random = Math.random();
+        let random = Math.random();
         return ((random * (max - min)) + min);
     };
 
-    var box = MeshBuilder.CreateBox("crate", { size: 2 }, scene);
+    let box = MeshBuilder.CreateBox("crate", { size: 2 }, scene);
     box.material = new StandardMaterial("Mat", scene);
     box.checkCollisions = true;
 
-    var boxNb = 6;
-    var theta = 0;
-    var radius = 6;
+    let boxNb = 6;
+    let theta = 0;
+    let radius = 6;
     box.position = new Vector3((radius + randomNumber(-0.5 * radius, 0.5 * radius)) * Math.cos(theta + randomNumber(-0.1 * theta, 0.1 * theta)), 1, (radius + randomNumber(-0.5 * radius, 0.5 * radius)) * Math.sin(theta + randomNumber(-0.1 * theta, 0.1 * theta)));
 
-    var boxes = [box];
-    for (var i = 1; i < boxNb; i++) {
+    let boxes = [box];
+    for (let i = 1; i < boxNb; i++) {
         theta += 2 * Math.PI / boxNb;
-        var newBox = box.clone("box" + i);
+        let newBox = box.clone("box" + i);
         boxes.push(newBox);
         newBox.position = new Vector3((radius + randomNumber(-0.5 * radius, 0.5 * radius)) * Math.cos(theta + randomNumber(-0.1 * theta, 0.1 * theta)), 1, (radius + randomNumber(-0.5 * radius, 0.5 * radius)) * Math.sin(theta + randomNumber(-0.1 * theta, 0.1 * theta)));
     }
@@ -123,23 +110,28 @@ const onSceneReady = (scene: Scene) => {
     camera.ellipsoidOffset = new Vector3(0, 1, 0);
 
     //Create Visible Ellipsoid around camera
-    var a = 0.5;
-    var b = 1;
-    var points = [];
-    for (var theta = -Math.PI / 2; theta < Math.PI / 2; theta += Math.PI / 36) {
+    let a = 0.5;
+    let b = 1;
+    let points = [];
+    for (let theta = -Math.PI / 2; theta < Math.PI / 2; theta += Math.PI / 36) {
         points.push(new Vector3(0, b * Math.sin(theta), a * Math.cos(theta)));
     }
 
-    var ellipse = [];
+    let ellipse = [];
     ellipse[0] = MeshBuilder.CreateLines("e", { points: points }, scene);
     ellipse[0].color = Color3.Red();
     ellipse[0].parent = camera;
     ellipse[0].rotation.y = 5 * Math.PI / 16;
-    for (var i = 1; i < 23; i++) {
+    for (let i = 1; i < 23; i++) {
         ellipse[i] = ellipse[0].clone("el" + i);
         ellipse[i].parent = camera;
         ellipse[i].rotation.y = 5 * Math.PI / 16 + i * Math.PI / 16;
     }
+
+    /** 키보드 입력 시 canvas 에 포커싱하여 불필요한 브라우져 액션 차단 */
+    window.addEventListener("keydown", function (event) {
+        canvas!.focus();
+    })
 
     /** scene 전환 시, inspector 종료작업 */
     handleSceneSwitch(scene, { enableScopeInfo: true });
