@@ -238,11 +238,15 @@ export class IsometricCamera implements ICameraInput<FreeCamera>{
         for (let index = 0; index < this._keys.length; index++) {
             let keyCode = this._keys[index];
             let speed = camera.speed;
+            console.log('spd ', camera.speed)
             if (this._keyMap.a.indexOf(keyCode) !== -1) {
                 // camera.rotation.y -= camera.angularSpeed; camera.speed
                 camera._localDirection.copyFromFloats(-speed, 0, 0);
+                // camera.cameraDirection.copyFromFloats(-speed, 0, 0);
             }
             else if (this._keyMap.w.indexOf(keyCode) !== -1) {
+                // camera._localDirection.copyFromFloats(0, 0.5, 0);
+                // camera.rotation.x = 1
                 camera._localDirection.copyFromFloats(0, 0, speed);
             }
             else if (this._keyMap.d.indexOf(keyCode) !== -1) {
@@ -251,6 +255,7 @@ export class IsometricCamera implements ICameraInput<FreeCamera>{
             }
             else if (this._keyMap.s.indexOf(keyCode) !== -1) {
                 camera._localDirection.copyFromFloats(0, 0, -speed);
+
             }
             else if (this._keyMap.ArrowUp.indexOf(keyCode) !== -1) {
                 camera._localDirection.copyFromFloats(0, 0, speed);

@@ -40,33 +40,48 @@ const onSceneReady = (scene: Scene) => {
   light.intensity = 0.6;
 
 
-  let camera = new UniversalCamera("MyCamera", new Vector3(0, 1, 0), scene);
-  camera.minZ = 0.0001;
+  // This creates and positions a free camera (non-mesh)
+  let camera = new UniversalCamera("camera1", new Vector3(-14, 20, 0), scene);
+  // This targets the camera to scene origin
+  camera.setTarget(new Vector3(0, 0, 0));
+  camera.mode = Camera.PERSPECTIVE_CAMERA;
+  camera.speed = 0.4;
+  camera.fov = 1.0;
+  camera.metadata = {
+    // mouse & keyboard properties
+    // Set by camera inputs. Defines, which input moves the camera (mouse or keys)
+    movedBy: null,
+    // target position, the camera should be moved to
+    targetPosition: camera.position.clone(),
+    // radius, that is used to rotate camera
+    // initial value dependent from camera position and camera target
+    radius: new Vector3(camera.position.x, 0, camera.position.z).subtract(new Vector3(camera.target.x, 0, camera.target.z)).length(),
+    // helper variable, to rotate camera
+    rotation: Tools.ToRadians(180) + camera.rotation.y,
+    // speed for rotation
+    rotationSpeed: 0.02,
+    // boundaries for x and z
+    minX: -30,
+    maxX: 30,
+    minZ: -30,
+    maxZ: 30,
+    // mousewheel properties
+    // similar to targetPosition, targetZoom contains the target value for the zoom
+    targetZoom: camera.fov,
+    // zoom boundaries
+    maxZoom: 1.4,
+    minZoom: 0.5,
+    // speed for zoom
+    zoom: 0.005,
+    // zoom distance per mouse wheel interaction
+    zoomSteps: 0.2,
+  }
+  camera.inputs.clear();
   camera.attachControl(canvas, true);
-  camera.speed = 0.02;
 
-  // camera.inputs.removeByType("FreeCameraKeyboardMoveInput");
-  // camera.inputs.removeByType("FreeCameraMouseInput");
-  // camera.inputs.add(new IsometricCamera({ inputType: InputTypeEnum.WASD, enablePreventDefault: false }));
 
-  // Add viewCamera that gives first person shooter view
-  let viewCamera = new UniversalCamera("viewCamera", new Vector3(0, 3, -3), scene);
-  viewCamera.attachControl(canvas, true);
-  viewCamera.minZ = 0.0001;
-  viewCamera.speed = 0.02;
-  // viewCamera.parent = cone;
-  viewCamera.setTarget(new Vector3(0, -0.0001, 1));
 
-  scene.activeCameras!.push(viewCamera);
-  // scene.activeCameras!.push(camera);
 
-  viewCamera.inputs.removeByType("FreeCameraKeyboardMoveInput");
-  viewCamera.inputs.removeByType("FreeCameraMouseInput");
-  viewCamera.inputs.add(new IsometricCamera({ inputType: InputTypeEnum.WASD, enablePreventDefault: false }));
-
-  //First remove the default management.
-
-  // camera.inputs.add(new CustomInputController({ inputType: InputTypeEnum.WASD, enablePreventDefault: false }));
 
 
 
@@ -99,32 +114,30 @@ const onSceneReady = (scene: Scene) => {
     newBox.position = new Vector3((radius + randomNumber(-0.5 * radius, 0.5 * radius)) * Math.cos(theta + randomNumber(-0.1 * theta, 0.1 * theta)), 1, (radius + randomNumber(-0.5 * radius, 0.5 * radius)) * Math.sin(theta + randomNumber(-0.1 * theta, 0.1 * theta)));
   }
 
-  // scene.gravity = new Vector3(0, -0.9, 0);
-  scene.collisionsEnabled = true;
 
-  camera.checkCollisions = true;
-  // camera.applyGravity = true;
-  camera.ellipsoid = new Vector3(0.5, 1, 0.5);
-  camera.ellipsoidOffset = new Vector3(0, 1, 0);
+  // scene.collisionsEnabled = true;
+  // camera.checkCollisions = true;
+  // camera.ellipsoid = new Vector3(0.5, 1, 0.5);
+  // camera.ellipsoidOffset = new Vector3(0, 1, 0);
 
-  //Create Visible Ellipsoid around camera
-  let a = 0.5;
-  let b = 1;
-  let points = [];
-  for (let theta = -Math.PI / 2; theta < Math.PI / 2; theta += Math.PI / 36) {
-    points.push(new Vector3(0, b * Math.sin(theta), a * Math.cos(theta)));
-  }
+  // //Create Visible Ellipsoid around camera
+  // let a = 0.5;
+  // let b = 1;
+  // let points = [];
+  // for (let theta = -Math.PI / 2; theta < Math.PI / 2; theta += Math.PI / 36) {
+  //   points.push(new Vector3(0, b * Math.sin(theta), a * Math.cos(theta)));
+  // }
 
-  let ellipse = [];
-  ellipse[0] = MeshBuilder.CreateLines("e", { points: points }, scene);
-  ellipse[0].color = Color3.Red();
-  ellipse[0].parent = camera;
-  ellipse[0].rotation.y = 5 * Math.PI / 16;
-  for (let i = 1; i < 23; i++) {
-    ellipse[i] = ellipse[0].clone("el" + i);
-    ellipse[i].parent = camera;
-    ellipse[i].rotation.y = 5 * Math.PI / 16 + i * Math.PI / 16;
-  }
+  // let ellipse = [];
+  // ellipse[0] = MeshBuilder.CreateLines("e", { points: points }, scene);
+  // ellipse[0].color = Color3.Red();
+  // ellipse[0].parent = camera;
+  // ellipse[0].rotation.y = 5 * Math.PI / 16;
+  // for (let i = 1; i < 23; i++) {
+  //   ellipse[i] = ellipse[0].clone("el" + i);
+  //   ellipse[i].parent = camera;
+  //   ellipse[i].rotation.y = 5 * Math.PI / 16 + i * Math.PI / 16;
+  // }
 
   const basicGround = MeshBuilder.CreateGround('basicGround', { width: 200, height: 200 });
   basicGround.rotation.y = Math.PI / 4;
