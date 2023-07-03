@@ -13,29 +13,19 @@ import {
   Space,
   DynamicTexture,
 } from '@babylonjs/core';
-import { handleSceneSwitch } from '@/pages/Tutorial/subscribeMsgEvt';
+import { LoadInspectorControl } from '@/clients/util/LoadInspectorControl';
 import { messageClient } from '@/clients/events';
 import { logger } from '@/common/utils/logger';
 
 
 const onSceneReady = (scene: Scene) => {
   logger.log('MeshParent')
-  void Promise.all([
-    import("@babylonjs/core/Debug/debugLayer"),
-    import("@babylonjs/inspector"),
-  ]).then((_values) => {
-    scene.debugLayer.show({
-      handleResize: true,
-      overlay: false,
-      // overlay: true, // inspector 대비 비율 화면
-      globalRoot: document.getElementById("#root") || undefined,
-    })
-    // scene.debugLayer.hide();
-  });
-
   const canvas = scene.getEngine().getRenderingCanvas();
   canvas!.height = 800;
   canvas!.width = 1000;
+
+  /** inspector 활성화 및 전환 시 통신이벤트 */
+  LoadInspectorControl(scene, canvas);
 
   const camera = new ArcRotateCamera("camera", -Math.PI / 2.2, Math.PI / 2.5, 15, new Vector3(0, 0, 0));
   camera.attachControl(canvas, true);
@@ -71,9 +61,6 @@ const onSceneReady = (scene: Scene) => {
     small.translate(Axis.Y, 0.001, Space.LOCAL);
   });
 
-
-  /** scene 전환 시, inspector 종료작업 */
-  handleSceneSwitch(scene, { enableScopeInfo: true });
 
   return scene;
 }

@@ -17,33 +17,21 @@ import {
   Color3,
   SpriteManager,
   Sprite,
-  Mesh,
-  Color4,
   SpotLight,
   FollowCamera
 } from '@babylonjs/core';
 import { AdvancedDynamicTexture, Control, Slider, StackPanel, TextBlock } from '@babylonjs/gui';
-import { handleSceneSwitch } from '@/pages/Tutorial/subscribeMsgEvt';
+import { LoadInspectorControl } from '@/clients/util/LoadInspectorControl';
 import { messageClient } from '@/clients/events';
 import { logger } from '@/common/utils/logger';
 
 const onSceneReady = (scene: Scene) => {
-  // debug 용
-  void Promise.all([
-    import("@babylonjs/core/Debug/debugLayer"),
-    import("@babylonjs/inspector"),
-  ]).then((_values) => {
-    scene.debugLayer.show({
-      handleResize: true,
-      overlay: false,
-      // overlay: true, // inspector 대비 비율 화면
-      globalRoot: document.getElementById("#root") || undefined,
-    })
-  })
-
   const canvas = scene.getEngine().getRenderingCanvas();
   canvas!.height = 800;
   canvas!.width = 1000;
+
+  /** inspector 활성화 및 전환 시 통신이벤트 */
+  LoadInspectorControl(scene, canvas);
 
   // This creates and initially positions a follow camera 	
   const followCam = new FollowCamera("FollowCam", new Vector3(-6, 0, 0), scene);
@@ -186,16 +174,16 @@ const onSceneReady = (scene: Scene) => {
     lamp!.rotation.y = -Math.PI / 4;
     lamp!.scaling = new Vector3(0.15, 0.15, 0.15);
 
-    const lamp3 = lamp.clone('lamp3');
+    const lamp3 = lamp!.clone('lamp3');
     lamp3!.position.z = -8;
 
 
-    const lamp1 = lamp?.clone('lamp1');
+    const lamp1 = lamp!.clone('lamp1');
     lamp1!.position = new Vector3(-8, -Math.PI / 2, 0.8);
-    lamp2 = lamp1.clone("lamp2");
-    lamp2.position.x = -2.7;
-    lamp2.position.z = 0.8;
-    lamp2.rotation.y = -Math.PI / 2;
+    const lamp2 = lamp1!.clone("lamp2");
+    lamp2!.position.x = -2.7;
+    lamp2!.position.z = 0.8;
+    lamp2!.rotation.y = -Math.PI / 2;
 
   });
 
@@ -228,10 +216,6 @@ const onSceneReady = (scene: Scene) => {
     }
   });
   panel.addControl(slider);
-
-
-  /** scene 전환 시, inspector 종료작업 */
-  handleSceneSwitch(scene, { enableScopeInfo: true });
 
 };
 

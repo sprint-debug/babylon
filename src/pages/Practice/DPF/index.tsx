@@ -20,7 +20,7 @@ import {
   Color3,
 } from '@babylonjs/core';
 import { GridMaterial } from '@babylonjs/materials';
-import { handleSceneSwitch } from '@/pages/Tutorial/subscribeMsgEvt';
+import { LoadInspectorControl } from '@/clients/util/LoadInspectorControl';
 import { messageClient } from '@/clients/events';
 import { logger } from '@/common/utils/logger';
 import { CustomInputController } from '@/clients/util/CustomInputController';
@@ -29,21 +29,12 @@ import { InputTypeEnum } from '@/clients/util/CustomInputControllerType';
 
 const onSceneReady = (scene: Scene) => {
   // debug 용
-  void Promise.all([
-    import("@babylonjs/core/Debug/debugLayer"),
-    import("@babylonjs/inspector"),
-  ]).then((_values) => {
-    scene.debugLayer.show({
-      handleResize: true,
-      overlay: false,
-      // overlay: true, // inspector 대비 비율 화면
-      globalRoot: document.getElementById("#root") || undefined,
-    })
-  })
-
   const canvas = scene.getEngine().getRenderingCanvas();
   canvas!.height = 800;
   canvas!.width = 1000;
+
+  /** inspector 활성화 및 전환 시 통신이벤트 */
+  LoadInspectorControl(scene, canvas);
 
   const light = new HemisphericLight("light", new Vector3(0, 50, 0), scene);
   light.intensity = 0.6;
@@ -63,7 +54,7 @@ const onSceneReady = (scene: Scene) => {
   viewCamera.attachControl(canvas, true);
   viewCamera.minZ = 0.0001;
   viewCamera.speed = 0.02;
-  viewCamera.parent = cone;
+  // viewCamera.parent = cone;
   viewCamera.setTarget(new Vector3(0, -0.0001, 1));
 
   scene.activeCameras!.push(viewCamera);
@@ -147,8 +138,6 @@ const onSceneReady = (scene: Scene) => {
     canvas!.focus();
   })
 
-  /** scene 전환 시, inspector 종료작업 */
-  handleSceneSwitch(scene, { enableScopeInfo: true });
 };
 
 // scene.registerBeforeRender(function () {
