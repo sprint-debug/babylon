@@ -27,6 +27,8 @@ import { CustomInputController } from '@/clients/util/CustomInputController';
 import { IsometricCamera } from '@/clients/util/IsometricCamera';
 import { InputTypeEnum } from '@/clients/util/CustomInputControllerType';
 import { RTSCameraKeyboardController } from '@/clients/util/RTSCameraKeyboardController';
+import { RTSCameraMouseController } from '@/clients/util/RTSCameraMouseController';
+import { RTSCameraWheelController } from '@/clients/util/RTSCameraWheelController';
 
 const onSceneReady = (scene: Scene) => {
   // debug 용
@@ -81,6 +83,8 @@ const onSceneReady = (scene: Scene) => {
   camera.attachControl(canvas, true);
 
   camera.inputs.add(new RTSCameraKeyboardController());
+  camera.inputs.add(new RTSCameraMouseController());
+  camera.inputs.add(new RTSCameraWheelController());
 
 
 

@@ -18,6 +18,7 @@ export class RTSCameraWheelController implements ICameraInput<UniversalCamera>{
 
     /** 마우스 휠 제어 */
     attachControl(noPreventDefault: boolean) {
+        this._scene = this.camera!.getScene();
 
         const _wheel = (evtInfo: PointerInfo) => {
             let evt = evtInfo.event as WheelEvent; // 바빌론 내부 문제로 IMouseEvent 가 넘어오기 때문에 캐스팅

@@ -35,7 +35,6 @@ export class RTSCameraKeyboardController implements ICameraInput<UniversalCamera
             let evt = info.event;
             if (!evt.metaKey) {
                 if (info.type === KeyboardEventTypes.KEYDOWN) {
-                    console.log('t')
                     if (
                         this.keysUp.indexOf(evt.keyCode) !== -1 ||
                         this.keysDown.indexOf(evt.keyCode) !== -1 ||
@@ -150,7 +149,6 @@ export class RTSCameraKeyboardController implements ICameraInput<UniversalCamera
             }
             else if (this.keysUp.indexOf(keyCode) !== -1) {
                 mdata.targetPosition.addInPlace(Vector3.TransformCoordinates(new Vector3(0, 0, speed), Matrix.RotationY(camera.rotation.y)));
-                mdata.targetPosition.addInPlace()
             }
             else if (this.keysRight.indexOf(keyCode) !== -1) {
                 mdata.targetPosition.addInPlace(Vector3.TransformCoordinates(new Vector3(speed, 0, 0), Matrix.RotationY(camera.rotation.y)));
@@ -192,10 +190,12 @@ export class RTSCameraKeyboardController implements ICameraInput<UniversalCamera
 
         // distance check
         var lengthDiff = (mdata.targetPosition.subtract(camera.position)).length();
-
+        // console.log('lengdff ', lengthDiff)
         // moving
         if (lengthDiff > 0 && mdata.movedBy === ECameraMovement.KEYS) {
-            var t = lengthDiff < 0.01 ? 1.0 : 0.02;
+            var t = lengthDiff < 0.01 ? 1.0 : 0.05; // condition ? t : f  ( f : 부분이 inertia 조정 )
+            // var t = lengthDiff < 0.01 ? 1.0 : 0.02;
+            console.log('T ', t)
             camera.position = Vector3.Lerp(camera.position, mdata.targetPosition, t);
             if (t === 1.0) {
                 mdata.movedBy = null;

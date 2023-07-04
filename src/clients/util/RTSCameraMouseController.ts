@@ -6,10 +6,11 @@ const ECameraMovement = {
     KEYS: 0,
     MOUSE: 1,
 }
-const gui = AdvancedDynamicTexture.CreateFullscreenUI('ui');
 
 /** todo - 마우스 외  휠, 키보드 클래스 만들어야함 */
 export class RTSCameraMouseController implements ICameraInput<UniversalCamera>{
+    private gui = AdvancedDynamicTexture.CreateFullscreenUI('ui');
+
     public camera!: UniversalCamera;
 
     private _disableEdgeScroll: () => void;
@@ -81,7 +82,7 @@ export class RTSCameraMouseController implements ICameraInput<UniversalCamera>{
         this.topEdge.onPointerOutObservable.add((eventData, eventState) => {
             _this._disableEdgeScroll();
         });
-        gui.addControl(this.topEdge);
+        this.gui.addControl(this.topEdge);
 
         // top right corner area
         this.topRightCorner.height = this._heightEdgeScroll;
@@ -103,7 +104,7 @@ export class RTSCameraMouseController implements ICameraInput<UniversalCamera>{
         this.topRightCorner.onPointerOutObservable.add((eventData, eventState) => {
             _this._disableEdgeScroll();
         });
-        gui.addControl(this.topRightCorner);
+        this.gui.addControl(this.topRightCorner);
 
         // right edge area
         this.rightEdge.height = 1 - 2 * this._widthEdgeScroll;
@@ -123,7 +124,7 @@ export class RTSCameraMouseController implements ICameraInput<UniversalCamera>{
         this.rightEdge.onPointerOutObservable.add((eventData, eventState) => {
             _this._disableEdgeScroll();
         });
-        gui.addControl(this.rightEdge);
+        this.gui.addControl(this.rightEdge);
 
         // bottom right corner area
         this.bottomRightCorner.height = this._heightEdgeScroll;
@@ -145,7 +146,7 @@ export class RTSCameraMouseController implements ICameraInput<UniversalCamera>{
         this.bottomRightCorner.onPointerOutObservable.add((eventData, eventState) => {
             _this._disableEdgeScroll();
         });
-        gui.addControl(this.bottomRightCorner);
+        this.gui.addControl(this.bottomRightCorner);
 
         // bottom edge area
         this.bottomEdge.width = 1 - 2 * this._heightEdgeScroll;
@@ -165,7 +166,7 @@ export class RTSCameraMouseController implements ICameraInput<UniversalCamera>{
         this.bottomEdge.onPointerOutObservable.add((eventData, eventState) => {
             _this._disableEdgeScroll();
         });
-        gui.addControl(this.bottomEdge);
+        this.gui.addControl(this.bottomEdge);
 
         // bottom left corner area
         this.bottomLeftCorner.height = this._heightEdgeScroll;
@@ -187,7 +188,7 @@ export class RTSCameraMouseController implements ICameraInput<UniversalCamera>{
         this.bottomLeftCorner.onPointerOutObservable.add((eventData, eventState) => {
             _this._disableEdgeScroll();
         });
-        gui.addControl(this.bottomLeftCorner);
+        this.gui.addControl(this.bottomLeftCorner);
 
         // left edge area
         this.leftEdge.height = 1 - 2 * this._widthEdgeScroll;
@@ -207,7 +208,7 @@ export class RTSCameraMouseController implements ICameraInput<UniversalCamera>{
         this.leftEdge.onPointerOutObservable.add((eventData, eventState) => {
             _this._disableEdgeScroll();
         });
-        gui.addControl(this.leftEdge);
+        this.gui.addControl(this.leftEdge);
 
         // top left corner area
         this.topLeftCorner.height = this._heightEdgeScroll;
@@ -229,7 +230,7 @@ export class RTSCameraMouseController implements ICameraInput<UniversalCamera>{
         this.topLeftCorner.onPointerOutObservable.add((eventData, eventState) => {
             _this._disableEdgeScroll();
         });
-        gui.addControl(this.topLeftCorner);
+        this.gui.addControl(this.topLeftCorner);
     };
 
     onContextMenu = (evt: any) => {
@@ -273,14 +274,14 @@ export class RTSCameraMouseController implements ICameraInput<UniversalCamera>{
             var element = engine.getInputElement();
             element && element.removeEventListener("contextmenu", this.onContextMenu);
         }
-        gui.removeControl(this.topEdge);
-        gui.removeControl(this.topRightCorner);
-        gui.removeControl(this.rightEdge);
-        gui.removeControl(this.bottomRightCorner);
-        gui.removeControl(this.bottomEdge);
-        gui.removeControl(this.bottomLeftCorner);
-        gui.removeControl(this.leftEdge);
-        gui.removeControl(this.topLeftCorner);
+        this.gui.removeControl(this.topEdge);
+        this.gui.removeControl(this.topRightCorner);
+        this.gui.removeControl(this.rightEdge);
+        this.gui.removeControl(this.bottomRightCorner);
+        this.gui.removeControl(this.bottomEdge);
+        this.gui.removeControl(this.bottomLeftCorner);
+        this.gui.removeControl(this.leftEdge);
+        this.gui.removeControl(this.topLeftCorner);
         // gui.remove(this.topEdge);
         // gui.remove(this.topRightCorner);
         // gui.remove(this.rightEdge);
