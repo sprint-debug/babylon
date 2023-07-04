@@ -33,6 +33,31 @@ const Init = () => {
 
   /** todo : 초기화 작업 */
 
+
+  // const [activeTab, setActiveTab] = React.useState('tab1');
+  // const [textAreaValue, setTextAreaValue] = React.useState('');
+  // const [parsedString, setParsedString] = React.useState('');
+  // const handleTabClick = (tab: string) => () => {
+  //   if (tab === 'tab2') {
+  //     try {
+  //       const tmpStr: string = textAreaValue;
+  //       const jsonString = JSON.parse(tmpStr);
+  //       console.log('parsedString STRING ', tmpStr);
+  //       console.log('jsonString STRING ', jsonString);
+  //       setParsedString(jsonString)
+  //     } catch (error) {
+  //       console.log('ERR ', error);
+  //       setParsedString('오류');
+
+  //     }
+  //   }
+  //   setActiveTab(tab);
+  // };
+  // const handleTextAreaChange = (e: any) => {
+  //   console.log('handleTEXTAREA ', e)
+  //   setTextAreaValue(e.target.value);
+  // };
+
   return (
     <main className="main-container">
 
@@ -66,6 +91,46 @@ const Init = () => {
               <label htmlFor="item2">2D Sprite, 3D 모델 리깅 TBD</label>
             </li>
           </ul>
+          {/* <div style={{
+            margin: '15px',
+            padding: '15px',
+            backgroundColor: 'white'
+          }}>
+            <div>
+              <button onClick={handleTabClick('tab1')}>input JSON string</button>
+              <button onClick={handleTabClick('tab2')}>view JSON string</button>
+            </div>
+            <div>
+              {activeTab === 'tab1' ? (
+                <div>
+                  <h3>Tab 1 Content</h3>
+                  <div>This is the content for Tab 1.</div>
+                  <input
+                    type="text"
+                    style={{ width: '250px', height: '250px' }}
+                    // value='test'
+                    defaultValue={textAreaValue}
+                    onChange={(e) => handleTextAreaChange(e)}
+                  />
+                </div>
+              ) : (
+                <div>
+                  <h3>prettified JSON</h3>
+                  <br />
+                  <div>
+                    <input
+                      type="text"
+                      style={{ width: '250px', height: '250px' }}
+                      value={parsedString}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+            <div>
+
+            </div>
+          </div> */}
         </div>
         : <div className="spinner-container">
           <Spinner />
