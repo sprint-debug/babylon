@@ -1,5 +1,8 @@
 import { UniversalCamera, ICameraInput, Vector3, Matrix, KeyboardInfo, Observer, Nullable, Scene, KeyboardEventTypes, Tools } from '@babylonjs/core'
 
+
+// https://forum.babylonjs.com/t/rts-camera-wasd-move-eq-rotate-mousewheel-zoom-edge-scroll/29289/4
+// https://playground.babylonjs.com/#8SZ28Q#12
 const ECameraMovement = {
     KEYS: 0,
     MOUSE: 1,
@@ -190,12 +193,9 @@ export class RTSCameraKeyboardController implements ICameraInput<UniversalCamera
 
         // distance check
         var lengthDiff = (mdata.targetPosition.subtract(camera.position)).length();
-        // console.log('lengdff ', lengthDiff)
         // moving
         if (lengthDiff > 0 && mdata.movedBy === ECameraMovement.KEYS) {
-            var t = lengthDiff < 0.01 ? 1.0 : 0.05; // condition ? t : f  ( f : 부분이 inertia 조정 )
-            // var t = lengthDiff < 0.01 ? 1.0 : 0.02;
-            console.log('T ', t)
+            var t = lengthDiff < 0.01 ? 1.0 : 0.1; //( f값 -> mouse controller.checkInput에서 동일하게 변경 필요 구조변경 TBD)//
             camera.position = Vector3.Lerp(camera.position, mdata.targetPosition, t);
             if (t === 1.0) {
                 mdata.movedBy = null;

@@ -2642,6 +2642,13 @@ readdirp@~3.6.0:
   dependencies:
     picomatch "^2.2.1"
 
+recast-detour@^1.6.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/recast-detour/-/recast-detour-1.6.2.tgz#cf216b9731e7a15633f4fd4be32c672397b3ed06"
+  integrity sha512-8MYHi+HPUYabDtcL6HNStCDVTNNDXDywqLtkc7W8o135xCP7a4iQuFmuqJ/KMgiiorTKq9Ocl7BHWHzLmASn/g==
+  dependencies:
+    "@types/emscripten" "^1.39.6"
+
 regenerator-runtime@^0.13.11:
   version "0.13.11"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz#f6dca3e7ceec20590d07ada785636a90cdca17f9"

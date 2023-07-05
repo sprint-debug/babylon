@@ -258,7 +258,7 @@ export class RTSCameraMouseController implements ICameraInput<UniversalCamera>{
             var lengthDiff = (mdata.targetPosition.subtract(this.camera.position)).length();
             // movedBy prevent moving camera by keys and mouse simultaneously
             if (lengthDiff > 0 && mdata.movedBy === ECameraMovement.MOUSE) {
-                var t = lengthDiff < 0.01 ? 1.0 : 0.02;
+                var t = lengthDiff < 0.01 ? 1.0 : 0.1; // c ? t : f ( f값 ->  keyboard controller.checkInput에서 동일하게 변경 필요 구조변경 TBD)
                 this.camera.position = Vector3.Lerp(this.camera.position, mdata.targetPosition, t);
                 if (t === 1.0) {
                     mdata.movedBy = null;

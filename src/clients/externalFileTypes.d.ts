@@ -10,3 +10,6 @@ declare module '*.json';
 
 // Physics
 declare module "ammo.js";
+
+// Nav
+declare module "recast.js";

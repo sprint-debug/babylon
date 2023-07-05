@@ -18,6 +18,7 @@ import {
   Viewport,
   StandardMaterial,
   Color3,
+  Mesh,
 } from '@babylonjs/core';
 import { GridMaterial } from '@babylonjs/materials';
 import { LoadInspectorControl } from '@/clients/util/LoadInspectorControl';
@@ -30,7 +31,37 @@ import { RTSCameraKeyboardController } from '@/clients/util/RTSCameraKeyboardCon
 import { RTSCameraMouseController } from '@/clients/util/RTSCameraMouseController';
 import { RTSCameraWheelController } from '@/clients/util/RTSCameraWheelController';
 
+
+
+// import * as test from "recast-detour";
+import Recast from 'recast-detour'
+// import Recast from "@/clients/externals/recast";
+import { RecastJSPlugin } from '@babylonjs/core/Navigation/Plugins/recastJSPlugin';
+
+
 const onSceneReady = (scene: Scene) => {
+
+  // const navPlugin = new RecastJSPlugin(Recast)
+  // const loadRecast = async () => {
+  //   const recast = await Recast();
+  //   return recast;
+  // }
+  // const recast = loadRecast();
+
+
+  async function buildNav() {
+    console.log('buildNav');
+    const recast = await Recast();
+    const navigationPlugin: RecastJSPlugin = new RecastJSPlugin(recast);
+    console.log('recast loaded');
+    // const navPlugin = new RecastJSPlugin();
+    console.log('nav plugin loaded ');
+    return navPlugin;
+  }
+  const navPlugin = buildNav();
+  logger.log('nav ')
+
+
   // debug 용
   const canvas = scene.getEngine().getRenderingCanvas();
   canvas!.height = 800;
@@ -48,7 +79,7 @@ const onSceneReady = (scene: Scene) => {
   // This targets the camera to scene origin
   camera.setTarget(new Vector3(0, 0, 0));
   camera.mode = Camera.PERSPECTIVE_CAMERA;
-  camera.speed = 0.4;
+  camera.speed = 0.5;
   camera.fov = 1.0;
   camera.metadata = {
     // mouse & keyboard properties
@@ -62,7 +93,7 @@ const onSceneReady = (scene: Scene) => {
     // helper variable, to rotate camera
     rotation: Tools.ToRadians(180) + camera.rotation.y,
     // speed for rotation
-    rotationSpeed: 0.02,
+    rotationSpeed: 0.04,
     // boundaries for x and z
     minX: -30,
     maxX: 30,
@@ -84,15 +115,11 @@ const onSceneReady = (scene: Scene) => {
 
   camera.inputs.add(new RTSCameraKeyboardController());
   camera.inputs.add(new RTSCameraMouseController());
-  camera.inputs.add(new RTSCameraWheelController());
+  // camera.inputs.add(new RTSCameraWheelController());
 
 
 
 
-
-  let cone = MeshBuilder.CreateCylinder("dummyCamera", { diameterTop: 0.01, diameterBottom: 0.2, height: 0.2 }, scene);
-  cone.parent = camera;
-  cone.rotation.x = Math.PI / 2;
 
   let randomNumber = function (min: number, max: number) {
     if (min == max) {
@@ -118,6 +145,52 @@ const onSceneReady = (scene: Scene) => {
     boxes.push(newBox);
     newBox.position = new Vector3((radius + randomNumber(-0.5 * radius, 0.5 * radius)) * Math.cos(theta + randomNumber(-0.1 * theta, 0.1 * theta)), 1, (radius + randomNumber(-0.5 * radius, 0.5 * radius)) * Math.sin(theta + randomNumber(-0.1 * theta, 0.1 * theta)));
   }
+
+  /** NavMesh Test */
+  // const recast = loadRecast();
+
+  // console.log('RECAST ', recast);
+  // const navPlugin = new RecastJSPlugin(Recast)
+
+
+  // navPlugin.setWorkerURL('workers/navMeshWorker.js');
+
+
+  // const createStaticMesh = (scene: Scene) => {
+
+  //   // Materials
+  //   let mat1 = new StandardMaterial('mat1', scene);
+  //   mat1.diffuseColor = new Color3(1, 1, 1);
+
+  //   let sphere = MeshBuilder.CreateSphere("sphere1", { diameter: 2, segments: 16 }, scene);
+  //   sphere.material = mat1;
+  //   sphere.position.y = 1;
+
+  //   let cube = MeshBuilder.CreateBox("cube", { size: 1, height: 3 }, scene);
+  //   cube.position = new Vector3(1, 1.5, 0);
+  //   //cube.material = mat2;
+
+  //   let mesh = Mesh.MergeMeshes([sphere, cube]);
+  //   return mesh;
+  // }
+
+  // let staticMesh = createStaticMesh(scene);
+  // let navmeshParameters = {
+  //   cs: 0.2,
+  //   ch: 0.2,
+  //   walkableSlopeAngle: 90,
+  //   walkableHeight: 1.0,
+  //   walkableClimb: 1,
+  //   walkableRadius: 1,
+  //   maxEdgeLen: 12.,
+  //   maxSimplificationError: 1.3,
+  //   minRegionArea: 8,
+  //   mergeRegionArea: 20,
+  //   maxVertsPerPoly: 6,
+  //   detailSampleDist: 6,
+  //   detailSampleMaxError: 1,
+  // };
+
 
 
   // scene.collisionsEnabled = true;
@@ -162,6 +235,8 @@ const onSceneReady = (scene: Scene) => {
 //   cylinder.position.x = Math.sin(alpha) * 10
 //   alpha += 0.01;
 // })
+
+
 
 const onRender = () => {
   logger.log('t')
