@@ -1,21 +1,18 @@
 import throttle from 'lodash/throttle';
-import { PropsWithChildren } from 'react';
+import { ButtonHTMLAttributes, MouseEvent } from 'react';
 
-export interface ButtonCoreProps {
-  className?: string;
-  disabled?: boolean;
-  onClick: () => void;
-  children: React.ReactNode | React.ReactNode[];
-}
+export type ButtonCoreProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
-const ButtonCore: React.FC<PropsWithChildren<ButtonCoreProps>> = ({
-  className,
-  disabled,
-  onClick,
+const ButtonCore = ({
   children,
+  onClick = () => { },
+  ...rest
 }: ButtonCoreProps) => {
+
+  const handleClick = (e: MouseEvent<HTMLButtonElement>) => onClick(e);
+
   return (
-    <button className={className} onClick={throttle(onClick, 1000)} disabled={disabled}>
+    <button onClick={throttle(handleClick, 1000)} {...rest}>
       {children}
     </button>
   );

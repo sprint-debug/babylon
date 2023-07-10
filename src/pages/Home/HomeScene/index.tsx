@@ -1,3 +1,5 @@
+import React from 'react';
+import { logger } from '@/common/utils/logger';
 import SceneComponent from 'babylonjs-hook';
 import {
   FreeCamera,
@@ -9,10 +11,12 @@ import {
   ExecuteCodeAction,
 } from '@babylonjs/core';
 import { messageClient } from '@/clients/events';
+import style from "../style.module.scss";
 
 let box: any;
 
 const onSceneReady = (scene: Scene) => {
+  logger.log('onSceneReady')
   // This creates and positions a free camera (non-mesh)
   const camera = new FreeCamera('camera1', new Vector3(0, 5, -10), scene);
 
@@ -68,12 +72,17 @@ const onRender = (scene: Scene) => {
 };
 
 const HomeScene = () => {
+  React.useEffect(() => {
+    logger.log('scene component rendered', [])
+    /** todo: 상위 요소에서 size 변경 시 useEffect 는 작동하지만, onSceneReady는 다시 실행되지 않는 듯함 정확한 확인필요 */
+  })
   return (
     <SceneComponent
       antialias
       onSceneReady={onSceneReady}
       onRender={onRender}
       id="my-canvas"
+      className={style.canvasElement}
     />
   );
 };

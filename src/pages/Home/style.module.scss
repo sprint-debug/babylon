@@ -1,0 +1,46 @@
+.containerPlacemode {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  border: 1px solid black;
+}
+
+
+.canvasContainer {
+  flex-grow: 1;
+  min-height: 50%;
+}
+
+.contentContainer {
+  height: 0%;
+  max-height: 50%;
+  background-color: grey;
+  transition: height 0.3s ease;
+
+}
+
+.expanded {
+  height: 10%;
+  transition: height 0.3s ease;
+}
+
+.contentContainer.expanded {
+  height: 100%;
+}
+
+.switchBtn {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  margin: 5px;
+  padding: 15px;
+  width: 80px;
+  height: 60px;
+  background-color: grey;
+}
+
+.canvasElement {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
