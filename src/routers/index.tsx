@@ -27,6 +27,7 @@ import CameraParent from '@/pages/Tutorial/CameraParent';
 import CameraController from '@/pages/Tutorial/CameraController';
 import Practice from '@/pages/Practice';
 import DPF from '@/pages/Practice/DPF';
+import AssetTest from '@/pages/Practice/AssetTest';
 import ProtoType from '@/pages/ProtoType';
 import Error from '@/pages/Error';
 
@@ -53,6 +54,7 @@ const router = createBrowserRouter([
         element: <Practice />,
         children: [
           { path: '1', element: <DPF /> },
+          { path: '2', element: <AssetTest /> },
         ]
       },
       {

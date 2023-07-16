@@ -33,33 +33,29 @@ import { RTSCameraWheelController } from '@/clients/util/RTSCameraWheelControlle
 
 
 
-// import * as test from "recast-detour";
-import Recast from 'recast-detour'
-// import Recast from "@/clients/externals/recast";
-import { RecastJSPlugin } from '@babylonjs/core/Navigation/Plugins/recastJSPlugin';
 
+// import Recast from 'recast-detour'
+// import { RecastJSPlugin } from '@babylonjs/core/Navigation/Plugins/recastJSPlugin';
 
 const onSceneReady = (scene: Scene) => {
 
-  // const navPlugin = new RecastJSPlugin(Recast)
-  // const loadRecast = async () => {
+  /** 230705 recast 라이브러리 현재 UMD, ESM 모듈 로딩 방식 차이로
+   * 제대로 로딩안됨. 해결하려면 추가적 시간 필요
+   * 현재 바빌론팀 관련하여 작업 중.  다른 작업으로 이동
+   */
+
+
+  // async function buildNav() {
+  //   console.log('buildNav');
   //   const recast = await Recast();
-  //   return recast;
+  //   const navigationPlugin: RecastJSPlugin = new RecastJSPlugin(recast);
+  //   console.log('recast loaded');
+  //   // const navPlugin = new RecastJSPlugin();
+  //   console.log('nav plugin loaded ');
+  //   return navPlugin;
   // }
-  // const recast = loadRecast();
-
-
-  async function buildNav() {
-    console.log('buildNav');
-    const recast = await Recast();
-    const navigationPlugin: RecastJSPlugin = new RecastJSPlugin(recast);
-    console.log('recast loaded');
-    // const navPlugin = new RecastJSPlugin();
-    console.log('nav plugin loaded ');
-    return navPlugin;
-  }
-  const navPlugin = buildNav();
-  logger.log('nav ')
+  // const navPlugin = buildNav();
+  // logger.log('nav ')
 
 
   // debug 용
