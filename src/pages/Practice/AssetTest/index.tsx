@@ -113,6 +113,8 @@ const onSceneReady = (scene: Scene) => {
     https://forum.babylonjs.com/t/bone-position-not-working-in-imported-glb-file/16043
     glb, gltf 의 경우 다르게 처리해야함 
     
+    https://www.babylonjs-playground.com/#VSURBJ
+    ik control
     */
 
     // SceneLoader.ImportMeshAsync('', '/src/assets/ex_tutorial/', 'myroom_ex.glb').then((res) => {
@@ -132,7 +134,6 @@ const onSceneReady = (scene: Scene) => {
 
         var skeleton = skeletons[0];
         var mesh = meshes[0];
-
 
         const bone = scene.getTransformNodeByName("Bip001 Pelvis");
         logger.log('bone ', bone)
