@@ -74,46 +74,10 @@ const onSceneReady = (scene: Scene) => {
 
     // This creates and positions a free camera (non-mesh)
     let camera = new UniversalCamera("camera1", new Vector3(-14, 20, 0), scene);
+    camera.attachControl(canvas, true);
     // This targets the camera to scene origin
     camera.setTarget(new Vector3(0, 0, 0));
-    camera.mode = Camera.PERSPECTIVE_CAMERA;
-    camera.speed = 0.5;
-    camera.fov = 1.0;
-    camera.metadata = {
-        // mouse & keyboard properties
-        // Set by camera inputs. Defines, which input moves the camera (mouse or keys)
-        movedBy: null,
-        // target position, the camera should be moved to
-        targetPosition: camera.position.clone(),
-        // radius, that is used to rotate camera
-        // initial value dependent from camera position and camera target
-        radius: new Vector3(camera.position.x, 0, camera.position.z).subtract(new Vector3(camera.target.x, 0, camera.target.z)).length(),
-        // helper variable, to rotate camera
-        rotation: Tools.ToRadians(180) + camera.rotation.y,
-        // speed for rotation
-        rotationSpeed: 0.04,
-        // boundaries for x and z
-        minX: -30,
-        maxX: 30,
-        minZ: -30,
-        maxZ: 30,
-        // mousewheel properties
-        // similar to targetPosition, targetZoom contains the target value for the zoom
-        targetZoom: camera.fov,
-        // zoom boundaries
-        maxZoom: 1.4,
-        minZoom: 0.5,
-        // speed for zoom
-        zoom: 0.005,
-        // zoom distance per mouse wheel interaction
-        zoomSteps: 0.2,
-    }
-    // camera.inputs.clear();
-    camera.attachControl(canvas, true);
 
-    // camera.inputs.add(new RTSCameraKeyboardController());
-    // camera.inputs.add(new RTSCameraMouseController());
-    // camera.inputs.add(new RTSCameraWheelController());
 
 
 
@@ -145,49 +109,59 @@ const onSceneReady = (scene: Scene) => {
     }
 
 
+    /*
+    https://forum.babylonjs.com/t/bone-position-not-working-in-imported-glb-file/16043
+    glb, gltf 의 경우 다르게 처리해야함 
+    
+    */
 
     // SceneLoader.ImportMeshAsync('', '/src/assets/ex_tutorial/', 'myroom_ex.glb').then((res) => {
-    // SceneLoader.ImportMesh('', '/src/assets/ex_tutorial/', 'myroom_ex.glb', scene, (meshes, particle, skeletons, animation) => {
-    //     console.log('TEST mesh ', meshes)
-    //     console.log('TEST skeleton ', skeletons)
-    //     console.log('TEST animation ', animation)
-    //     // const dude = res.meshes[0];
-    //     // dude.scaling = new Vector3(0.25, 0.25, 0.25);
-    //     const girl = meshes[0]
-    //     girl.scaling = new Vector3(6, 6, 6);
-    //     // girl.rotation.y = 1;
-
-    //     var skeleton = skeletons[0];
-    //     var mesh = meshes[0];
-    //     // skeleton.bones[3].translate(new Vector3(122, 2323, 0));
-
-
-    //     scene.beforeRender = function () {
-    //         skeleton.bones[7].translate(new Vector3(1, 0.1, 0));
-
-
-    //     }
-
-    //     mesh.rotate(new Vector3(0, Math.PI, 0), Math.PI / 2);
-
-    //     // scene.beginAnimation(girl, 0, 200, true);
-    // });
-
-    SceneLoader.ImportMesh("", "/src/assets/ex_tutorial/", "Dude.babylon", scene, function (newMeshes, particleSystems, skeletons) {
-        var mesh = newMeshes[0];
-        var skeleton = skeletons[0];
-        mesh.scaling = new Vector3(0.1, 0.1, 0.1);
-
-        console.log('TEST mesh ', mesh)
+    SceneLoader.ImportMesh('', '/src/assets/ex_tutorial/', 'test.glb', scene, (meshes, particle, skeletons, animation) => {
+        const bone = scene.getTransformNodeByName("Bone.001");
+        bone!.position = new Vector3(5, 5, 5);
+    })
+    SceneLoader.ImportMesh('', '/src/assets/ex_tutorial/', 'myroom_ex.glb', scene, (meshes, particle, skeletons, animation) => {
+        console.log('TEST mesh ', meshes)
         console.log('TEST skeleton ', skeletons)
+        console.log('TEST animation ', animation)
+        // const dude = res.meshes[0];
+        // dude.scaling = new Vector3(0.25, 0.25, 0.25);
+        const girl = meshes[0]
+        girl.scaling = new Vector3(3, 3, 3);
+        // girl.rotation.y = 1;
+
+        var skeleton = skeletons[0];
+        var mesh = meshes[0];
+
+
+        const bone = scene.getTransformNodeByName("Bip001 Pelvis");
+        logger.log('bone ', bone)
+        bone!.position = new Vector3(2, 0, 0);
+        const bone1 = scene.getTransformNodeByName("Bip001 L Thigh");
+        bone1!.position.z = 3;
+
+        // scene.beforeRender = function () {
+        //     skeleton.bones[7].translate(new Vector3(1, 0.1, 0));
+
+        // }
+
         mesh.rotate(new Vector3(0, Math.PI, 0), Math.PI / 2);
-        scene.beforeRender = function () {
-
-            skeleton.bones[7].translate(new Vector3(0.05, 0.05, 0));
-
-        }
-
+        // scene.beginAnimation(girl, 0, 200, true);
+        scene.animationsEnabled = false;
     });
+
+    // SceneLoader.ImportMesh("", "/src/assets/ex_tutorial/", "Dude.babylon", scene, function (newMeshes, particleSystems, skeletons) {
+    //     var mesh = newMeshes[0];
+    //     var skeleton = skeletons[0];
+    //     mesh.scaling = new Vector3(0.1, 0.1, 0.1);
+
+    //     console.log('TEST mesh ', mesh)
+    //     console.log('TEST skeleton ', skeletons)
+    //     mesh.rotate(new Vector3(0, Math.PI, 0), Math.PI / 2);
+    //     scene.beforeRender = function () {
+    //         skeleton.bones[7].translate(new Vector3(0.05, 0.05, 0));
+    //     }
+    // });
 
     // SceneLoader.ImportMesh('', '/src/assets/ex_tutorial/', 'WhipperNude.glb', scene, (meshes, particle, skeleton, animation) => {
 
