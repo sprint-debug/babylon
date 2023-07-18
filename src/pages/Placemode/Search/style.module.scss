@@ -1,0 +1,22 @@
+.searchInput {
+  display: flex;
+  margin-left: 10px;
+
+  input[type="text"] {
+    border: none;
+    border-bottom: 1px solid white;
+    background-color: transparent;
+    outline: none;
+  }
+}
+
+.resetBtn {
+  margin-right: 10px;
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+
+  img {
+    height: 100%;
+  }
+}

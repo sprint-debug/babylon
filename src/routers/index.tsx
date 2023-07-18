@@ -26,6 +26,8 @@ import Shadow from '@/pages/Tutorial/Shadow';
 import CameraParent from '@/pages/Tutorial/CameraParent';
 import CameraController from '@/pages/Tutorial/CameraController';
 import Practice from '@/pages/Practice';
+import PlaceMode from '@/pages/Placemode';
+import PlacemodeOnlyUI from '@/pages/PlacemodeOnlyUI';
 import DPF from '@/pages/Practice/DPF';
 import AssetTest from '@/pages/Practice/AssetTest';
 import ProtoType from '@/pages/ProtoType';
@@ -45,21 +47,31 @@ const router = createBrowserRouter([
     // },
     children: [
       { index: true, element: <Init /> },
+      { path: 'home', element: <Home /> },
       {
-        path: 'home',
-        element: <Home />
+        path: 'sceneWithUI',
+        element: <PlaceMode />
       },
       {
-        path: 'practice',
-        element: <Practice />,
+        path: 'sceneSeparatedUI',
+        // path: 'sceneSeparatedUI/:id',
+        element: <Room />,
+        children: [
+          {
+            path: 'scenemode',
+            element: <PlacemodeOnlyUI />,
+          }
+        ]
+      },
+      {
+        path: 'practice', element: <Practice />,
         children: [
           { path: '1', element: <DPF /> },
           { path: '2', element: <AssetTest /> },
         ]
       },
       {
-        path: 'tutorial',
-        element: <TutorialMenu />,
+        path: 'tutorial', element: <TutorialMenu />,
         children: [
           { path: '1', element: <Tutorial />, children: [] },
           { path: '2', element: <CBF /> },

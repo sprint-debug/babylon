@@ -2,7 +2,7 @@ import {
   EItemCategory1Depth,
   EItemCategory2Depth,
   EItemCategory3Depth,
-} from './exampleJSON';
+} from './EItemCategory';
 import {
   ICategory,
   IMainCategory,

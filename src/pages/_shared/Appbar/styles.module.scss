@@ -1,0 +1,11 @@
+
+
+
+.appbar-wrap{
+    position: fixed;
+    z-index: $zindex-appbar;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 30px;
+}
