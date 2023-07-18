@@ -11,46 +11,8 @@ import Item from './Item';
 import style from "./style.module.scss";
 import { logger } from '@/common/utils/logger';
 
-class Combatant {
-  constructor(id, health, attack) {
-    this.id = id;
-    this.health = health;
-    this.attack = attack;
-  }
-
-  attackEnemy(enemy) {
-    enemy.health -= this.attack;
-  }
-
-  isAlive() {
-    return this.health > 0;
-  }
-}
-
-const delay = (ms: number) => {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-const simulateCombat = async (tick: number) => {
-  // if (tick === 0) return;
-  while (0 < tick) {
-    logger.log('tick ', tick);
-    --tick;
-    await delay(200);
-  }
-};
-
 const PlaceMode = () => {
   const { placeMode } = usePlaceMode();
-
-  let soldierA = new Combatant('A', 10, 1);
-  let soldierB = new Combatant('B', 10, 1);
-  logger.log('b4 ', soldierA)
-  logger.log('b4 ', soldierB)
-  soldierA.attackEnemy(soldierB);
-  logger.log('af ', soldierA)
-  logger.log('af ', soldierB)
-  simulateCombat(60);
 
   return (
     <FixedView className={style.containerPlacemode}>
