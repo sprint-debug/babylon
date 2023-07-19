@@ -1,0 +1,80 @@
+.containerPlacemode {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.canvasContainer {
+    flex-grow: 1;
+    min-height: 50%;
+}
+
+.contentSearch {
+    position: relative;
+    top: -50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    opacity: 0;
+
+    &.expanded {
+        opacity: 1;
+        transition: opacity 0.3s ease;
+    }
+}
+
+.contentCategory {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
+    position: relative;
+    top: -25px;
+    overflow-x: auto;
+    width: 100%;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+}
+
+.contentSort {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    top: -15px;
+    margin: 5px;
+}
+
+.contentItem {
+    position: relative;
+    top: -15px;
+    height: calc(100% - 100px);
+    overflow-y: auto;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+
+    // @media (max-width: 600px) {
+    //     justify-content: center;
+    //     padding: 0 10px;
+    // }
+}
+
+.canvasElement {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}

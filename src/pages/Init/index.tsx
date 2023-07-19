@@ -63,10 +63,10 @@ const Init = () => {
 
       {isLoading ?
         <div className='btn-container '>
+          <button onClick={routePage('/combat_test')} className="btn-main">combat_test</button>
           <button onClick={routePage('/sceneWithUI')} className="btn-main">scene-UI combined</button>
-          <button onClick={routePage('/sceneSeparatedUI')} className="btn-main">scene-UI separated scene</button>
-          <button onClick={routePage('/sceneSeparatedUI/scenemode')} className="btn-main">scene-UI separated withUI</button>
           <button onClick={routePage('/sceneSeparatedUI')} className="btn-main">sceneSeparatedUI</button>
+          <button onClick={routePage('/sceneSeparatedUI/scenemode')} className="btn-main">scene-UI separated withUI</button>
           <button onClick={routePage('/practice')} className="btn-main">Practice</button>
           <button onClick={routePage('/tutorial')} className="btn-main">Go to Basic Tutorials</button>
           <ul className='todo-list'>

@@ -3,6 +3,7 @@ import App from '@/App';
 import Demo from '@/pages/Demo';
 import Home from '@/pages/Home';
 import Room from '@/pages/Room';
+import CombatMode from '@/pages/Combatmode';
 import Init from '@/pages/Init';
 import TutorialMenu from '@/pages/Tutorial';
 import Tutorial from '@/pages/Tutorial/TutorialScene';
@@ -95,7 +96,7 @@ const router = createBrowserRouter([
           { path: '20', element: <CameraController /> },
         ]
       },
-
+      { path: 'combat_test', element: <CombatMode /> },
     ],
     errorElement: <Error />,
   },

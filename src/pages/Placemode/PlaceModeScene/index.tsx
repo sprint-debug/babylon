@@ -126,11 +126,12 @@ const delay = (ms: number) => {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-const simulateCombat = async (tick: number) => {
+const simulateCombat = async (tick: number, combatant: object[]) => {
+  logger.log('combatant ', combatant);
   // if (tick === 0) return;
   while (0 < tick) {
     logger.log('tick ', tick);
-    --tick;
+    tick--;
     await delay(200);
   }
 };

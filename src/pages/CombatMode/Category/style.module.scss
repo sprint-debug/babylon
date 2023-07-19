@@ -1,0 +1,15 @@
+.categoryBtn {
+  position: relative;
+  width: 40px !important;
+  height: 40px;
+  margin: 0px 5px 0px 5px;
+  z-index: 1;
+
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+
+  img {
+    height: 100%;
+  }
+}
