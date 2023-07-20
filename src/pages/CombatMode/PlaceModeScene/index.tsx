@@ -16,6 +16,7 @@ import { AdvancedDynamicTexture, Control, TextBlock } from '@babylonjs/gui';
 import { messageClient } from '@/clients/events';
 import { logger } from '@/common/utils/logger';
 import { CombatManager, Soldier, prepareCombatants } from './CombatManager';
+import { CombatantObserver, CombatLogObserver } from './CombatManagerObserverType';
 import style from "@/pages/Placemode/style.module.scss";
 
 let box: any;
@@ -95,7 +96,15 @@ const PlaceModeScene = () => {
     const test = new CombatManager(unitGp1, unitGp2);
     test.resolveCombat();
 
-    // return () => window.removeEventListener('resize',)
+
+    // const alice = new CombatantObserver('Alice', 100, 25);
+    // const bob = new CombatantObserver('Bob', 120, 20);
+    // const combatLog = new CombatLogObserver();
+    // alice.addObserver(combatLog);
+    // bob.addObserver(combatLog);
+    // alice.attack(bob);
+    // bob.attack(alice);
+
   }, [])
 
   return (
