@@ -12,12 +12,19 @@ import {
   Color3,
   Mesh,
 } from '@babylonjs/core';
-import { AdvancedDynamicTexture, Control, TextBlock } from '@babylonjs/gui';
+import { AdvancedDynamicTexture, Control, Ellipse, TextBlock } from '@babylonjs/gui';
 import { messageClient } from '@/clients/events';
 import { logger } from '@/common/utils/logger';
 import { CombatManager, Soldier, prepareCombatants } from './CombatManager';
 import { CombatantObserver, CombatLogObserver } from './CombatManagerObserverType';
+
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+
 import style from "@/pages/Placemode/style.module.scss";
+import { ProgressBar, ProgressBarOptions, Tween } from './ProgressBar';
+
+
 
 let box: any;
 
@@ -45,6 +52,19 @@ const onSceneReady = (scene: Scene) => {
   messageClient.addListener('box', () => {
     box.position.y = 5;
   });
+
+  let UI = AdvancedDynamicTexture.CreateFullscreenUI('UI');
+  let pbOptions: ProgressBarOptions = {
+    width: "50%",
+    height: "10%",
+    hMargin: 0.02,
+    vMargin: 0.1,
+    cornerRadiusBackgroundBar: 10,
+    cornerRadiusProgressBar: 10
+  }
+  let pb = new ProgressBar('dict unlock', 50, 150, [0, '40%'], UI, pbOptions);
+
+  Tween.createTween(scene, pb, 'progress', 0, 150, 5, true).restart();
 
   // // Our built-in 'ground' shape.
   // MeshBuilder.CreateGround('ground', { width: 6, height: 6 }, scene);
@@ -108,13 +128,35 @@ const PlaceModeScene = () => {
   }, [])
 
   return (
-    <SceneComponent
-      antialias
-      onSceneReady={onSceneReady}
-      onRender={onRender}
-      id="my-canvas"
-      className={style.canvasElement}
-    />
+    <>
+      <div style={{
+        position: 'absolute',
+        top: 50,
+        left: 50,
+        zIndex: 1,
+        width: 50,
+        height: 50
+      }}>
+        <CircularProgressbar value={66} />
+      </div >
+      <div style={{
+        position: 'absolute',
+        top: 50,
+        left: 200,
+        zIndex: 1,
+        width: 50,
+        height: 50
+      }}>
+        <CircularProgressbar value={66} />
+      </div >
+      <SceneComponent
+        antialias
+        onSceneReady={onSceneReady}
+        onRender={onRender}
+        id="my-canvas"
+        className={style.canvasElement}
+      />
+    </>
   );
 };
 

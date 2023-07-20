@@ -71,12 +71,50 @@ export class CombatManager {
 
 
   /** Scenario: Both Party fight until one loses */
-  *combatGenerator() {
+  // *combatGenerator() {
+  //   let remainingGp1 = false;
+  //   let remainingGp2 = false;
 
+  //   while (true) {
+  //     remainingGp1 = this.group1.some((el) => el.isAlive())
+  //     remainingGp2 = this.group2.some((el) => el.isAlive())
+  //     if (!remainingGp1 || !remainingGp2) break;
+
+  //     for (const soldierA of this.group1) {
+  //       for (const soldierB of this.group2) {
+  //         if (soldierA.isAlive() && soldierB.isAlive()) {
+  //           soldierA.attack(soldierB);
+  //           yield; // Pause here, then resume on the next timer tick.
+  //           soldierB.attack(soldierA);
+  //           yield;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+
+  // resolveCombat() {
+  //   const combat = this.combatGenerator();
+  //   const timer = window.setInterval(() => {
+  //     const rx = combat.next();
+  //     if (rx.done) {
+  //       console.log('Gp1 ', this.group1)
+  //       console.log('Gp2 ', this.group2)
+  //       clearInterval(timer);
+  //     }
+  //   }, 100);
+  // }
+
+
+  /** Scenario: only fight till limited tick */
+  *combatGenerator(tick: number) {
+    logger.log('tick ', tick);
     let remainingGp1 = false;
     let remainingGp2 = false;
-
-    while (true) {
+    while (tick > 0) {
+      logger.log('tick ', tick);
+      --tick;
+      if (tick === 0) yield 'stop';
 
       remainingGp1 = this.group1.some((el) => el.isAlive())
       remainingGp2 = this.group2.some((el) => el.isAlive())
@@ -84,7 +122,6 @@ export class CombatManager {
 
       for (const soldierA of this.group1) {
         for (const soldierB of this.group2) {
-
           if (soldierA.isAlive() && soldierB.isAlive()) {
             soldierA.attack(soldierB);
             yield; // Pause here, then resume on the next timer tick.
@@ -94,37 +131,39 @@ export class CombatManager {
         }
       }
     }
+
+
+
+    // while (true) {
+    // }
   }
 
   resolveCombat() {
-
-    const combat = this.combatGenerator();
-    // while (true) {
-    //   const rx = combat.next();
-    //   console.log('rx ', rx)
-    //   if (rx.done) {
-    //     console.log('Gp1 ', this.group1)
-    //     console.log('Gp2 ', this.group2)
-    //     break;
-    //   };
-    // }
-
+    const combat = this.combatGenerator(7);
     const timer = window.setInterval(() => {
+      logger.log('setInterval ');
       const rx = combat.next();
-      if (rx.done) {
+      logger.log('rx ', rx);
+      if (rx.value === 'stop' || rx.done) {
         console.log('Gp1 ', this.group1)
         console.log('Gp2 ', this.group2)
         clearInterval(timer);
       }
     }, 100);
-
   }
 
 
 
 
-  /** Scenario: only fight till limited tick */
-
+  // while (true) {
+  //   const rx = combat.next();
+  //   console.log('rx ', rx)
+  //   if (rx.done) {
+  //     console.log('Gp1 ', this.group1)
+  //     console.log('Gp2 ', this.group2)
+  //     break;
+  //   };
+  // }
 
 
 }
@@ -149,18 +188,18 @@ export const prepareCombatants = (count: number, name: string, hp: number, atk: 
 
 */
 
-  // /** this can be a class method in the future */
-  // const prepareCombatants = (count: number) => {
-  //   const list = [];
-  //   for (let i = 0; i < count; i++) {
-  //     const element = new Combatant('A', 10, 1);
-  //     list.push(element);
-  //   }
-  //   return list;
-  // }
+// /** this can be a class method in the future */
+// const prepareCombatants = (count: number) => {
+//   const list = [];
+//   for (let i = 0; i < count; i++) {
+//     const element = new Combatant('A', 10, 1);
+//     list.push(element);
+//   }
+//   return list;
+// }
 
-  // const test = prepareCombatants(3);
-  // logger.log('TEST ', test);
+// const test = prepareCombatants(3);
+// logger.log('TEST ', test);
 
 
 /** vanilla 이벤트 에미터 */

@@ -196,40 +196,17 @@ const PlaceModeScene = () => {
   }, [])
 
   return (
-    <SceneComponent
-      antialias
-      onSceneReady={onSceneReady}
-      onRender={onRender}
-      id="my-canvas"
-      className={style.canvasElement}
-    />
+    <>
+
+      <SceneComponent
+        antialias
+        onSceneReady={onSceneReady}
+        onRender={onRender}
+        id="my-canvas"
+        className={style.canvasElement}
+      />
+    </>
   );
 };
 
 export default PlaceModeScene;
-
-
-class Civilian {
-  id: string;
-  health: number;
-  attack: number;
-
-  morale: number;
-  gender: string;
-
-  isPsychic: boolean;
-
-  constructor(id: string, health: number, attack: number) {
-    this.id = id;
-    this.health = health;
-    this.attack = attack;
-  }
-
-  attackEnemy(enemy: Combatant) {
-    enemy.health -= this.attack;
-  }
-
-  isAlive() {
-    return this.health > 0;
-  }
-}

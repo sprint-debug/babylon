@@ -40,6 +40,7 @@ const Header = (): React.ReactElement => {
   const SkinMode = (): React.ReactElement => {
     return (
       <React.Fragment>
+
         <Button onClick={togglePlaceMode} className={style.closeBtn}>
           <Icon src={`close.svg`} />
         </Button>
