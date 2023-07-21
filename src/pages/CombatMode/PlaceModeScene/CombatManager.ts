@@ -1,6 +1,5 @@
 import EventEmitter from 'eventemitter3';
 import { logger } from '@/common/utils/logger';
-import { setInterval } from 'timers/promises';
 
 export class Soldier extends EventEmitter {
   name: any;
