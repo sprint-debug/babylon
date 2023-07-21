@@ -172,3 +172,17 @@ export class Tween {
     }
 
 }
+
+/** ex usage */
+// let UI = AdvancedDynamicTexture.CreateFullscreenUI('UI');
+//   let pbOptions: ProgressBarOptions = {
+//     width: "50%",
+//     height: "10%",
+//     hMargin: 0.02,
+//     vMargin: 0.1,
+//     cornerRadiusBackgroundBar: 10,
+//     cornerRadiusProgressBar: 10
+//   }
+//   let pb = new ProgressBar('dict unlock', 50, 150, [0, '40%'], UI, pbOptions);
+
+//   Tween.createTween(scene, pb, 'progress', 0, 150, 5, true).restart();

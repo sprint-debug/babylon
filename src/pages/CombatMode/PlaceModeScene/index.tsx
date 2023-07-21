@@ -40,35 +40,40 @@ const onSceneReady = (scene: Scene) => {
   const light = new HemisphericLight('light', new Vector3(0, 1, 0), scene); // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
   light.intensity = 0.5; // Default intensity is 1. Let's dim the light a small amount
 
-  box = MeshBuilder.CreateBox('box', { size: 2 }, scene);  // Our built-in 'box' shape.
-  box.position.y = 1;  // Move the box upward 1/2 its height
-  box.actionManager = new ActionManager(scene);
-  box.actionManager.registerAction(
-    new ExecuteCodeAction(ActionManager.OnPickTrigger, () => {
-      messageClient.postMessage('alert', { text: 'hi' });
-    }),
-  );
+
 
   messageClient.addListener('box', () => {
     box.position.y = 5;
   });
 
-  let UI = AdvancedDynamicTexture.CreateFullscreenUI('UI');
+
+  let unitDisc = MeshBuilder.CreateDisc('unit', { radius: 0.25, sideOrientation: Mesh.DOUBLESIDE }, scene);
+  let discMat = new StandardMaterial('discMat', scene);
+  discMat.diffuseColor = new Color3(1, 1, 0);
+  unitDisc.material = discMat;
+  unitDisc.rotation.x = Math.PI / 2;
+  // unitDisc.position.y = 1;
+  // unitDisc.position.x = 4;
+
+  let UI = AdvancedDynamicTexture.CreateForMesh(unitDisc);
+  // let UI = AdvancedDynamicTexture.CreateFullscreenUI('UI');
+  UI.background = 'green'
+
   let pbOptions: ProgressBarOptions = {
-    width: "50%",
-    height: "10%",
+    width: 0.5,
+    height: '10%',
     hMargin: 0.02,
     vMargin: 0.1,
+    colorBackgroundBar: 'red',
     cornerRadiusBackgroundBar: 10,
     cornerRadiusProgressBar: 10
   }
   let pb = new ProgressBar('dict unlock', 50, 150, [0, '40%'], UI, pbOptions);
-  // for (let i = 0; i < 5; i++) {
-
-  //   pb.progress += 2
-  // }
 
   Tween.createTween(scene, pb, 'progress', 0, 150, 5, true).restart();
+
+
+
 
   // // Our built-in 'ground' shape.
   // MeshBuilder.CreateGround('ground', { width: 6, height: 6 }, scene);
@@ -96,7 +101,14 @@ const onSceneReady = (scene: Scene) => {
 
 };
 
-
+// box = MeshBuilder.CreateBox('box', { size: 2 }, scene);  // Our built-in 'box' shape.
+// box.position.y = 1;  // Move the box upward 1/2 its height
+// box.actionManager = new ActionManager(scene);
+// box.actionManager.registerAction(
+//   new ExecuteCodeAction(ActionManager.OnPickTrigger, () => {
+//     messageClient.postMessage('alert', { text: 'hi' });
+//   }),
+// );
 /**
  * Will run on every frame render.  We are spinning the box on y-axis.
  */
