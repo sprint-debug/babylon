@@ -131,11 +131,6 @@ export class CombatManager {
         }
       }
     }
-
-
-
-    // while (true) {
-    // }
   }
 
   resolveCombat() {

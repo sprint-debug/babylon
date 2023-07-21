@@ -1,7 +1,7 @@
 // @ts-nocheck1
 //https://playground.babylonjs.com/#P3XLK9
 import { Animatable, EasingFunction } from "@babylonjs/core/Animations";
-import { Scene, Color3, Vector2, Vector3, Quaternion } from "@babylonjs/core";
+import { Scene, Color3, Vector2, Vector3, Quaternion, Animation } from "@babylonjs/core";
 import { AdvancedDynamicTexture, Container, Control, Rectangle, TextBlock } from "@babylonjs/gui/2D";
 
 

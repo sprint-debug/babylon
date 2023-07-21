@@ -63,6 +63,10 @@ const onSceneReady = (scene: Scene) => {
     cornerRadiusProgressBar: 10
   }
   let pb = new ProgressBar('dict unlock', 50, 150, [0, '40%'], UI, pbOptions);
+  // for (let i = 0; i < 5; i++) {
+
+  //   pb.progress += 2
+  // }
 
   Tween.createTween(scene, pb, 'progress', 0, 150, 5, true).restart();
 
