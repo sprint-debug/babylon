@@ -25,6 +25,7 @@ import 'react-circular-progressbar/dist/styles.css';
 
 import { ProgressBar, ProgressBarOptions, Tween } from './ProgressBar';
 import style from "@/pages/CombatMode/style.module.scss";
+import Icon from '@/components/Icon';
 
 
 
@@ -126,6 +127,15 @@ const onRender = (scene: Scene) => {
 
 const PlaceModeScene = () => {
   const [colorOpt, setColorOpt] = React.useState(false);
+  const [colorIdx, setColorIdx] = React.useState(0);
+  const colorOptData = [
+    { idx: 0, colorCode: '#8F00FF' },
+    { idx: 1, colorCode: '#FF72D7' },
+    { idx: 2, colorCode: '#FDFFAA' },
+    { idx: 3, colorCode: '#31C1FF' },
+    { idx: 4, colorCode: '#00FF29' },
+    { idx: 5, colorCode: '#FF8A00' }
+  ];
 
   const handleClick = () => {
     logger.log('handleClick');
@@ -133,6 +143,10 @@ const PlaceModeScene = () => {
   const handleColor = () => {
     logger.log('handleColor');
     setColorOpt(!colorOpt);
+  };
+  const handleColorSelect = (idx: number) => () => {
+    logger.log('handleColorSelect');
+    setColorIdx(idx);
   };
 
   useEffect(() => {
@@ -178,51 +192,19 @@ const PlaceModeScene = () => {
       </div >
       <div className={`${style.colorOption} ${colorOpt ? style.expanded : ''}`}>
         <div onClick={handleColor} >
-          <img src='vite.svg' />
-        </div>
-        <div onClick={handleClick} >
-          <img src='vite.svg' />
-        </div>
-        <div onClick={handleClick} >
-          <img src='vite.svg' />
-        </div>
-      </div>
-      <div className={`${style.colorOption} ${colorOpt ? style.expanded : ''}`}>
-        <div onClick={handleColor} >
-          <img src='vite.svg' />
+          <Icon name={`vite`} />
         </div>
         <div className={style.colorBtnList}>
-          <div onClick={handleClick} className={style.colorBtn}>
-            <img src='vite.svg' />
-          </div>
-          <div onClick={handleClick} className={style.colorBtn}>
-            <img src='vite.svg' />
-          </div>
-          <div onClick={handleClick} className={style.colorBtn}>
-            <img src='vite.svg' />
-          </div>
-          <div onClick={handleClick} className={style.colorBtn}>
-            <img src='vite.svg' />
-          </div>
-          <div onClick={handleClick} className={style.colorBtn}>
-            <img src='vite.svg' />
-          </div>
-          <div onClick={handleClick} className={style.colorBtn}>
-            <img src='vite.svg' />
-          </div>
-          <div onClick={handleClick} className={style.colorBtn}>
-            <img src='vite.svg' />
-          </div>
-          <div onClick={handleClick} className={style.colorBtn}>
-            <img src='vite.svg' />
-          </div>
-          <div onClick={handleClick} className={style.colorBtn}>
-            <img src='vite.svg' />
-          </div>
+          {colorOptData.map((option, idx) => (
+            <div onClick={handleColorSelect(idx)} className={style.colorBtn} style={{ color: option.colorCode }} >
+              <Icon name={`${colorIdx === idx ? 'color-btn-selected' : 'color-btn'}`} />
+            </div>
+          ))
+          }
 
         </div>
         <div onClick={handleClick} >
-          <img src='vite.svg' />
+          <Icon name={`vite`} />
         </div>
       </div>
       <SceneComponent
