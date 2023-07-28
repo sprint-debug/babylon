@@ -3,18 +3,44 @@
     overflow-x: hidden;
     width: 10%;
     position: absolute;
-    top: 0px;
+    top: -5px;
     left: 50%;
     background: black;
     border-radius: 15px;
+    padding: 2px 0px;
     z-index: 1;
     transition: left 0.5s ease, width 0.5s ease;
+
 
     &.expanded {
         width: 95%;
         left: 3%;
     }
 }
+
+.colorBtnList {
+    overflow-x: scroll;
+    display: flex;
+    -webkit-mask-image: linear-gradient(to left, transparent 0%, rgba(0, 0, 0, 0.2) 3%, black 15%);
+    mask-image: linear-gradient(to left, transparent 0%, rgba(0, 0, 0, 0.2) 3%, black 15%);
+    // -webkit-mask-image: linear-gradient(to left, transparent 0%, rgba(0, 0, 0, 0.2) 10%, black 90%);
+    // -webkit-mask-image: linear-gradient(to left, transparent, black);
+    // mask-image: linear-gradient(to left, transparent, black);
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+}
+
+.colorBtn {
+    margin: 5px;
+}
+
+.colorSaveBtn {}
 
 
 .containerPlacemode {

@@ -187,6 +187,44 @@ const PlaceModeScene = () => {
           <img src='vite.svg' />
         </div>
       </div>
+      <div className={`${style.colorOption} ${colorOpt ? style.expanded : ''}`}>
+        <div onClick={handleColor} >
+          <img src='vite.svg' />
+        </div>
+        <div className={style.colorBtnList}>
+          <div onClick={handleClick} className={style.colorBtn}>
+            <img src='vite.svg' />
+          </div>
+          <div onClick={handleClick} className={style.colorBtn}>
+            <img src='vite.svg' />
+          </div>
+          <div onClick={handleClick} className={style.colorBtn}>
+            <img src='vite.svg' />
+          </div>
+          <div onClick={handleClick} className={style.colorBtn}>
+            <img src='vite.svg' />
+          </div>
+          <div onClick={handleClick} className={style.colorBtn}>
+            <img src='vite.svg' />
+          </div>
+          <div onClick={handleClick} className={style.colorBtn}>
+            <img src='vite.svg' />
+          </div>
+          <div onClick={handleClick} className={style.colorBtn}>
+            <img src='vite.svg' />
+          </div>
+          <div onClick={handleClick} className={style.colorBtn}>
+            <img src='vite.svg' />
+          </div>
+          <div onClick={handleClick} className={style.colorBtn}>
+            <img src='vite.svg' />
+          </div>
+
+        </div>
+        <div onClick={handleClick} >
+          <img src='vite.svg' />
+        </div>
+      </div>
       <SceneComponent
         antialias
         onSceneReady={onSceneReady}
