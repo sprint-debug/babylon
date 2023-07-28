@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect } from 'react';
 import SceneComponent from 'babylonjs-hook';
 import {
@@ -17,12 +18,13 @@ import { messageClient } from '@/clients/events';
 import { logger } from '@/common/utils/logger';
 import { CombatManager, Soldier, prepareCombatants } from './CombatManager';
 import { CombatantObserver, CombatLogObserver } from './CombatManagerObserverType';
+import { Html } from 'react-babylonjs'
 
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
-import style from "@/pages/Placemode/style.module.scss";
 import { ProgressBar, ProgressBarOptions, Tween } from './ProgressBar';
+import style from "@/pages/CombatMode/style.module.scss";
 
 
 
@@ -123,6 +125,15 @@ const onRender = (scene: Scene) => {
 
 
 const PlaceModeScene = () => {
+  const [colorOpt, setColorOpt] = React.useState(false);
+
+  const handleClick = () => {
+    logger.log('handleClick');
+  };
+  const handleColor = () => {
+    logger.log('handleColor');
+    setColorOpt(!colorOpt);
+  };
 
   useEffect(() => {
     console.log('scene')
@@ -165,6 +176,17 @@ const PlaceModeScene = () => {
       }}>
         <CircularProgressbar value={66} />
       </div >
+      <div className={`${style.colorOption} ${colorOpt ? style.expanded : ''}`}>
+        <div onClick={handleColor} >
+          <img src='vite.svg' />
+        </div>
+        <div onClick={handleClick} >
+          <img src='vite.svg' />
+        </div>
+        <div onClick={handleClick} >
+          <img src='vite.svg' />
+        </div>
+      </div>
       <SceneComponent
         antialias
         onSceneReady={onSceneReady}
