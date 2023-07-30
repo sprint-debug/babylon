@@ -14,8 +14,8 @@ import {
 } from '@babylonjs/core';
 import { AdvancedDynamicTexture, Control, TextBlock } from '@babylonjs/gui';
 import { messageClient } from '@/clients/events';
-import style from "@/pages/Placemode/style.module.scss";
 import { logger } from '@/common/utils/logger';
+import style from "../style.module.scss";
 
 let box: any;
 

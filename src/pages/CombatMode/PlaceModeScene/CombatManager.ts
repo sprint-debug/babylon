@@ -1,5 +1,8 @@
 import EventEmitter from 'eventemitter3';
 import { logger } from '@/common/utils/logger';
+import { Scene, Color3, Mesh, MeshBuilder, StandardMaterial } from '@babylonjs/core';
+import { AdvancedDynamicTexture } from '@babylonjs/gui';
+import { ProgressBar, ProgressBarOptions } from './ProgressBar';
 
 export class Soldier extends EventEmitter {
   name: any;
@@ -163,11 +166,12 @@ export class CombatManager {
 }
 
 
-export const prepareCombatants = (count: number, name: string, hp: number, atk: number) => {
+export const prepareCombatants = (count: number, name: string, hp: number, atk: number, scene: Scene) => {
   const list = [];
   for (let i = 0; i < count; i++) {
     const element = new Soldier(`${name}${i}`, hp, atk);
     list.push(element);
+
   }
   return list;
 }

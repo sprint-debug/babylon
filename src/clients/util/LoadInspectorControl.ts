@@ -1,5 +1,5 @@
 import { Nullable, Scene } from '@babylonjs/core';
-import { handleSceneSwitch } from '@/pages/Tutorial/subscribeMsgEvt';
+import { handleSceneSwitch } from '@/pages/Tutorial/Content/subscribeMsgEvt';
 import { AdvancedDynamicTexture, Button, Control } from '@babylonjs/gui/2D';
 
 export const LoadInspectorControl = (scene: Scene, canvas: Nullable<HTMLCanvasElement>) => {

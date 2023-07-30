@@ -4,7 +4,7 @@ import Button from '@/components/Button';
 import { Outlet, NavLink } from 'react-router-dom';
 import { logger } from '@/common/utils/logger';
 import Text from '@/components/Text';
-import FixedView from '../_shared/Layouts/FixedView';
+import FixedView from '../../_shared/Layouts/FixedView';
 import './style.scss';
 
 const Tutorial = () => {
