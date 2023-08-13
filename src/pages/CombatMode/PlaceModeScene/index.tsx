@@ -71,11 +71,11 @@ const onSceneReady = (scene: Scene) => {
     cornerRadiusBackgroundBar: 10,
     cornerRadiusProgressBar: 10
   }
-  // let pb = new ProgressBar('dict unlock', 50, 150, [0, '40%'], UI, pbOptions);
-  // let pb2 = new ProgressBar('dict unlock', 50, 150, [20, '20%'], UI, pbOptions);
+  let pb = new ProgressBar('dict unlock', 50, 150, [0, '40%'], UI, pbOptions);
+  let pb2 = new ProgressBar('dict unlock', 50, 150, [20, '20%'], UI, pbOptions);
 
-  // pb.progress = 50;
-  // Tween.createTween(scene, pb, 'progress', 0, 150, 5, true).restart();
+  pb.progress = 50;
+  Tween.createTween(scene, pb, 'progress', 0, 150, 5, true).restart();
 
   const unitGp1 = prepareCombatants(3, 'A', 10, 1, scene);
   const unitGp2 = prepareCombatants(3, 'B', 11, 1, scene);

@@ -47,7 +47,7 @@ const Header = (): React.ReactElement => {
           <Icon src={`point.svg`} />
         </Button>
         <Button onClick={handleClick} className={style.saveAndPurchaseBtn}>
-          <Icon src={`coin.svg`} />
+          {/* <Icon src={`coin.svg`} /> */}
         </Button>
       </React.Fragment>
     );
