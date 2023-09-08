@@ -52,7 +52,7 @@ export default ({ antialias, engineOptions, adaptToDeviceRatio, sceneOptions, on
       scene.getEngine().dispose();
 
       /** 디버그 레이어 때문에 사용추가 */
-      scene.debugLayer.hide();
+      // scene.debugLayer.hide();
 
       if (window) {
         window.removeEventListener("resize", resize);

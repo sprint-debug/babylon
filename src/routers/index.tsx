@@ -12,6 +12,7 @@ import PlaceMode from '@/pages/UI_example/Placemode';
 import PlacemodeOnlyUI from '@/pages/UI_example/PlacemodeOnlyUI';
 import DPF from '@/pages/Practice/DPF';
 import AssetTest from '@/pages/Practice/AssetTest';
+import ReactBabylonTest from '@/pages/Practice/ReactBabylonTest';
 import ProtoType from '@/pages/ProtoType';
 import Error from '@/pages/Error';
 
@@ -50,6 +51,7 @@ const router = createBrowserRouter([
         children: [
           { path: '1', element: <DPF /> },
           { path: '2', element: <AssetTest /> },
+          { path: '3', element: <ReactBabylonTest /> },
         ]
       },
       {

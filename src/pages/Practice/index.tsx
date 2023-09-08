@@ -45,6 +45,9 @@ const Practice = () => {
                     <NavLink to='2' className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} >
                         AssetTest
                     </NavLink>
+                    <NavLink to='3' className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} >
+                        ReactBabylonTest
+                    </NavLink>
                 </nav>
 
             </div>

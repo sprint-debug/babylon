@@ -2564,6 +2564,13 @@ queue-microtask@^1.2.2:
   resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.2.3.tgz#4929228bbc724dfac43e0efb058caf7b6cfb6243"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
 
+react-babylonjs@^3.1.20:
+  version "3.1.20"
+  resolved "https://registry.yarnpkg.com/react-babylonjs/-/react-babylonjs-3.1.20.tgz#e46fa032c6207f50ab684343ef8b9fa965d5f188"
+  integrity sha512-+5xZxcVJtKd7mHZqDb0njzmGR8IXuAl2pAtWqOfFkmSYA4Hn+nWC1qrGw3xpZMqFYkw+uu0coFZL431zNlyoNQ==
+  dependencies:
+    react-reconciler "^0.27.0"
+
 react-circular-progressbar@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-circular-progressbar/-/react-circular-progressbar-2.1.0.tgz#99e5ae499c21de82223b498289e96f66adb8fa3a"
@@ -2628,6 +2635,14 @@ react-property@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/react-property/-/react-property-2.0.0.tgz#2156ba9d85fa4741faf1918b38efc1eae3c6a136"
   integrity sha512-kzmNjIgU32mO4mmH5+iUyrqlpFQhF8K2k7eZ4fdLSOPFrD1XgEuSBv9LDEgxRXTMBqMd8ppT0x6TIzqE5pdGdw==
+
+react-reconciler@^0.27.0:
+  version "0.27.0"
+  resolved "https://registry.yarnpkg.com/react-reconciler/-/react-reconciler-0.27.0.tgz#360124fdf2d76447c7491ee5f0e04503ed9acf5b"
+  integrity sha512-HmMDKciQjYmBRGuuhIaKA1ba/7a+UsM5FzOZsMO2JYHt9Jh8reCb7j1eDC95NOyUlKM9KRyvdx0flBuDvYSBoA==
+  dependencies:
+    loose-envify "^1.1.0"
+    scheduler "^0.21.0"
 
 react-refresh@^0.14.0:
   version "0.14.0"
@@ -2770,6 +2785,13 @@ sass@^1.63.4:
     chokidar ">=3.0.0 <4.0.0"
     immutable "^4.0.0"
     source-map-js ">=0.6.2 <2.0.0"
+
+scheduler@^0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.21.0.tgz#6fd2532ff5a6d877b6edb12f00d8ab7e8f308820"
+  integrity sha512-1r87x5fz9MXqswA2ERLo0EbOAU74DpIUO090gIasYTqlVoJeMcl+Z1Rg7WHz+qtPujhS/hGIt9kxZOYBV3faRQ==
+  dependencies:
+    loose-envify "^1.1.0"
 
 scheduler@^0.23.0:
   version "0.23.0"
