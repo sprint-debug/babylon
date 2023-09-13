@@ -48,6 +48,8 @@ export const babylonInit = async (sceneName = "testRoom"): Promise<void> => {
     // Watch for browser/canvas resize events
     window.addEventListener("resize", function () {
         engine.resize();
+        this.window.postMessage('reize', payload)
     });
+
 };
 

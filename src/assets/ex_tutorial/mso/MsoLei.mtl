@@ -1,0 +1,82 @@
+newmtl Fingernails
+d 1
+Kd 1 1 1
+map_Kd ./Maps/G9Lei_Nails_D.jpg
+
+newmtl Toenails
+d 1
+Kd 1 1 1
+map_Kd ./Maps/G9Lei_Nails_D.jpg
+
+newmtl Legs
+d 1
+Kd 0.94509804 0.94509804 0.94509804
+map_Kd ./Maps/G9Lei_Legs_D.jpg
+
+newmtl Mouth_Cavity
+d 1
+Kd 0.94509804 0.94509804 0.94509804
+map_Kd ./Maps/G9Lei_Head_D.jpg
+
+newmtl Arms
+d 1
+Kd 0.94509804 0.94509804 0.94509804
+map_Kd ./Maps/G9Lei_Arms_D.jpg
+
+newmtl Head
+d 1
+Kd 0.94509804 0.94509804 0.94509804
+map_Kd ./Maps/G9Lei_Head_D.jpg
+
+newmtl Body
+d 1
+Kd 0.94509804 0.94509804 0.94509804
+map_Kd ./Maps/G9Lei_Body_D.jpg
+
+newmtl EyeMoisture_Left
+d 0.995
+Kd 1 1 1
+
+newmtl Eye_Left
+d 1
+Kd 1 1 1
+map_Kd ./Maps/G9Lei_Eyes_BL_Alt.jpg
+
+newmtl Eye_Right
+d 1
+Kd 1 1 1
+map_Kd ./Maps/G9Lei_Eyes_BL_Alt.jpg
+
+newmtl EyeMoisture_Right
+d 0.995
+Kd 1 1 1
+
+newmtl Tear
+d 0.995
+Kd 0.89411765 0.89411765 0.89411765
+map_D "./ConvertedMaps/G9 Tear.tif"
+
+newmtl Mouth
+d 1
+Kd 1 0.7764706 0.7764706
+map_Kd ./Maps/G9Lei_Mouth_D.jpg
+
+newmtl Teeth
+d 1
+Kd 1 1 1
+map_Kd ./Maps/G9Lei_Mouth_D.jpg
+
+newmtl Eyelashes_Lower
+d 1
+Kd 0 0 0
+map_D ./ConvertedMaps/G9Lei_Lashes_TR.tif
+
+newmtl Eyelashes_Upper
+d 1
+Kd 0 0 0
+map_D ./ConvertedMaps/G9Lei_Lashes_TR.tif
+
+newmtl Default
+d 0.90181822
+Kd 0 0 0
+

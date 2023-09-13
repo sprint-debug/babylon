@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from '@/App';
 import Demo from '@/pages/Demo';
+import Html from '@/pages/Html';
 import Home from '@/pages/Home';
 import Room from '@/pages/Room';
 import CombatMode from '@/pages/Combatmode';
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
         path: 'sceneWithUI',
         element: <PlaceMode />
       },
+      { path: 'html', element: <Html /> },
       {
         path: 'ui-example',
         // path: 'sceneSeparatedUI/:id',

@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  background-color: rgb(86, 76, 94);
+}
+
+.menu_area {
+  min-width: 150px;
+}
+
+.scene_area {
+  flex-grow: 1;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar a {
+  color: rgb(255, 229, 229)
+}
+
+#sidebar a.active {
+  color: rgb(130, 233, 147);
+}

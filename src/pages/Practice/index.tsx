@@ -47,6 +47,7 @@ const Practice = () => {
                     </NavLink>
                     <NavLink to='3' className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active" : ""} >
                         ReactBabylonTest
+                        html in babylon
                     </NavLink>
                 </nav>
 
