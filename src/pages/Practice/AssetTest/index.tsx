@@ -159,7 +159,7 @@ const onSceneReady = (scene: Scene) => {
     if (oldgui != null) {
         oldgui.remove();
     }
-
+    //https://github.com/dataarts/dat.gui/blob/master/API.md
     var gui = new GUI();
     gui.domElement.style.marginTop = "100px";
     gui.domElement.id = "datGUI";
