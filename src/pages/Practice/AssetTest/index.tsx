@@ -21,8 +21,10 @@ import {
     Mesh,
     Space,
     Axis,
+    SkeletonViewer
 } from '@babylonjs/core';
 import { GridMaterial } from '@babylonjs/materials';
+// import { gui}
 import { LoadInspectorControl } from '@/clients/util/LoadInspectorControl';
 import { messageClient } from '@/clients/events';
 import { logger } from '@/common/utils/logger';
@@ -33,6 +35,7 @@ import { RTSCameraKeyboardController } from '@/clients/util/RTSCameraKeyboardCon
 import { RTSCameraMouseController } from '@/clients/util/RTSCameraMouseController';
 import { RTSCameraWheelController } from '@/clients/util/RTSCameraWheelController';
 
+import { GUI } from 'dat.gui';
 
 
 
@@ -118,51 +121,101 @@ const onSceneReady = (scene: Scene) => {
     */
 
     // SceneLoader.ImportMeshAsync('', '/src/assets/ex_tutorial/', 'myroom_ex.glb').then((res) => {
-    SceneLoader.ImportMesh('', '/src/assets/ex_tutorial/', 'test.glb', scene, (meshes, particle, skeletons, animation) => {
-        const bone = scene.getTransformNodeByName("Bone.001");
-        bone!.position = new Vector3(5, 5, 5);
-    })
-    SceneLoader.ImportMesh('', '/src/assets/ex_tutorial/', 'myroom_ex.glb', scene, (meshes, particle, skeletons, animation) => {
-        console.log('TEST mesh ', meshes)
-        console.log('TEST skeleton ', skeletons)
-        console.log('TEST animation ', animation)
-        // const dude = res.meshes[0];
-        // dude.scaling = new Vector3(0.25, 0.25, 0.25);
-        const girl = meshes[0]
-        girl.scaling = new Vector3(3, 3, 3);
-        // girl.rotation.y = 1;
-
-        var skeleton = skeletons[0];
-        var mesh = meshes[0];
-
-        const bone = scene.getTransformNodeByName("Bip001 Pelvis");
-        logger.log('bone ', bone)
-        bone!.position = new Vector3(2, 0, 0);
-        const bone1 = scene.getTransformNodeByName("Bip001 L Thigh");
-        bone1!.position.z = 3;
-
-        // scene.beforeRender = function () {
-        //     skeleton.bones[7].translate(new Vector3(1, 0.1, 0));
-
-        // }
-
-        mesh.rotate(new Vector3(0, Math.PI, 0), Math.PI / 2);
-        // scene.beginAnimation(girl, 0, 200, true);
-        scene.animationsEnabled = false;
-    });
-
-    // SceneLoader.ImportMesh("", "/src/assets/ex_tutorial/", "Dude.babylon", scene, function (newMeshes, particleSystems, skeletons) {
-    //     var mesh = newMeshes[0];
-    //     var skeleton = skeletons[0];
-    //     mesh.scaling = new Vector3(0.1, 0.1, 0.1);
-
-    //     console.log('TEST mesh ', mesh)
+    // SceneLoader.ImportMesh('', '/src/assets/ex_tutorial/', 'test.glb', scene, (meshes, particle, skeletons, animation) => {
+    //     const bone = scene.getTransformNodeByName("Bone.001");
+    //     bone!.position = new Vector3(5, 5, 5);
+    // })
+    // SceneLoader.ImportMesh('', '/src/assets/ex_tutorial/', 'myroom_ex.glb', scene, (meshes, particle, skeletons, animation) => {
+    //     console.log('TEST mesh ', meshes)
     //     console.log('TEST skeleton ', skeletons)
+    //     console.log('TEST animation ', animation)
+    //     // const dude = res.meshes[0];
+    //     // dude.scaling = new Vector3(0.25, 0.25, 0.25);
+    //     const girl = meshes[0]
+    //     girl.scaling = new Vector3(3, 3, 3);
+    //     // girl.rotation.y = 1;
+
+    //     var skeleton = skeletons[0];
+    //     var mesh = meshes[0];
+
+    //     const bone = scene.getTransformNodeByName("Bip001 Pelvis");
+    //     logger.log('bone ', bone)
+    //     bone!.position = new Vector3(2, 0, 0);
+    //     const bone1 = scene.getTransformNodeByName("Bip001 L Thigh");
+    //     bone1!.position.z = 3;
+
+    //     // scene.beforeRender = function () {
+    //     //     skeleton.bones[7].translate(new Vector3(1, 0.1, 0));
+
+    //     // }
+
     //     mesh.rotate(new Vector3(0, Math.PI, 0), Math.PI / 2);
-    //     scene.beforeRender = function () {
-    //         skeleton.bones[7].translate(new Vector3(0.05, 0.05, 0));
-    //     }
+    //     // scene.beginAnimation(girl, 0, 200, true);
+    //     scene.animationsEnabled = false;
     // });
+
+
+    var oldgui = document.querySelector("#datGUI");
+    if (oldgui != null) {
+        oldgui.remove();
+    }
+
+    var gui = new GUI();
+    gui.domElement.style.marginTop = "100px";
+    gui.domElement.id = "datGUI";
+
+    var config = {
+        headScale: 1,
+        bicepScale: 1,
+        foreArmScale: 1,
+        foreArmRotation: 0,
+    }
+
+    gui.add(config, 'headScale', .5, 2);
+    gui.add(config, 'bicepScale', .5, 2);
+    gui.add(config, 'foreArmScale', .5, 2);
+    gui.add(config, 'foreArmRotation', 0, 2);
+
+
+    SceneLoader.ImportMesh("", "/src/assets/ex_tutorial/", "Dude.babylon", scene, function (newMeshes, particleSystems, skeletons) {
+        let mesh = newMeshes[0];
+        let skeleton = skeletons[0];
+        mesh.scaling = new Vector3(0.1, 0.1, 0.1);
+        mesh.position = new Vector3(0, 0, 0);
+        mesh.rotation = new Vector3(0, -Math.PI / 2, 0)
+
+        // Create a skeleton viewer for the mesh
+        let skeletonViewer = new SkeletonViewer(skeleton, mesh, scene);
+        skeletonViewer.isEnabled = true; // Enable it
+        skeletonViewer.color = Color3.Red(); // Change default color from white to red
+
+        console.log('TEST mesh ', mesh)
+        console.log('TEST skeleton ', skeletons)
+        // scene.beginAnimation(skeletons[0], 0, 100, true, 1.0);
+
+        let head = skeleton.bones[7];
+        let rightBicep = skeleton.bones[13];
+        let rightForeArm = skeleton.bones[14];
+
+        scene.registerBeforeRender(function () {
+            // head.scale(config.headScale, config.headScale, config.headScale, true);
+            // rightBicep.scale(1, config.bicepScale, config.bicepScale, true);
+            // rightForeArm.scale(1, config.foreArmScale, config.foreArmScale, true);
+
+            head.setScale(new Vector3(config.headScale, config.headScale, config.headScale));
+            rightBicep.setScale(new Vector3(1, config.bicepScale, config.bicepScale));
+            rightForeArm.setScale(new Vector3(1, config.foreArmScale, config.foreArmScale));
+
+            // rightForeArm.setRotation(new Vector3(0, config.foreArmRotation, 0), Space.LOCAL)
+            let rotAxix = new Vector3(1, -0.2, 0); // cyinldrical rotation
+            // let rotAxix = new Vector3(0, 1, 0); // rotate like propeller
+            // let rotAxix = new Vector3(0, 0, 1);
+            // rightForeArm.rotate(rotAxix, config.foreArmRotation, Space.WORLD)
+            rightForeArm.rotate(rotAxix, config.foreArmRotation, Space.LOCAL)
+            // head.rotate(rotAxix, config.foreArmRotation, Space.LOCAL)
+
+        });
+    });
 
     // SceneLoader.ImportMesh('', '/src/assets/ex_tutorial/', 'WhipperNude.glb', scene, (meshes, particle, skeleton, animation) => {
 
