@@ -1,0 +1,102 @@
+.wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: $default-background-color;
+
+  .badge {
+    position: absolute;
+    width: rem(8px);
+    height: rem(8px);
+    border-radius: 50%;
+    bottom: 0;
+    left: 0;
+    opacity: 0.9;
+
+    &.primary {
+      background-color: $primary-color;
+    } 
+    
+    &.secondary {
+      background-color: $secondary-color;
+    }
+  }
+
+  
+  &.circle {
+    border-radius: 50%;
+    border: 1px solid $gray-scale-700;
+  }
+  
+  &.circle-bl {
+    border-radius: 50% 50% 50% rem(8px);
+    border: 1px solid $gray-scale-700;
+  }
+  
+  &.circle-br {
+    border-radius: 50% 50% rem(8px) 50%;
+    border: 1px solid $gray-scale-700;
+  }
+  
+
+  //- 
+  &.xxs {
+    width: rem(20px);
+    height: rem(20px);
+  }
+
+  //- 
+  &.xs {
+    width: rem(24px);
+    height: rem(24px);
+  }
+
+  //- 
+  &.s {
+    width: rem(28px);
+    height: rem(28px);
+  }
+
+  //
+  &.m {
+    width: rem(36px);
+    height: rem(36px);
+  }
+
+  &.l {
+    width: rem(40px);
+    height: rem(40px);
+  }
+
+  &.xl {
+    width: rem(48px);
+    height: rem(48px);
+  }
+
+  &.xxl {
+    width: rem(80px);
+    height: rem(80px);
+  }
+ 
+ 
+  
+  &.primary {
+    background-color: $primary-color;
+  } 
+  
+  &.secondary {
+    background-color: $secondary-color;
+  }
+  
+  &.tertiary  {
+    background-color: $tertiary-color;
+  }
+
+  &.black {
+    background-color: black;
+    color: white;
+  }
+}
+

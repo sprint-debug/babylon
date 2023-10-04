@@ -1,0 +1,35 @@
+@import 'sass-rem';
+@import './_variables';
+@import './_mixin';
+
+// html {
+//     @include baseline; // Default zoom to 100%
+
+//     @include medium-view {
+//         //@include baseline(120%);
+//     }
+
+//     @include expanded-view {
+//         //@include baseline(150%);
+//     }
+// }
+
+// *:not(input):not(textarea) {
+//   -webkit-user-select: none; /* disable selection/Copy of UIWebView */
+//   user-select: none;
+//   -webkit-touch-callout: none; /* disable the IOS popup when long-press on a link */
+//   -webkit-tap-highlight-color: transparent;
+// }
+
+//- 임시로  바빌론 테스트를 위하여 color-picker 색상을 컨트롤
+// .numeric-input,
+// .hex-input {
+//   color: black;
+// }
+
+// body {
+//   font-family: 'noto-sans-cjk-kr', sans-serif;
+//   font-weight: $font-weight-medium;
+//   overflow: hidden;
+//   overscroll-behavior: none;
+// }

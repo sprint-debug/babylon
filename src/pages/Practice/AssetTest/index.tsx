@@ -37,7 +37,7 @@ import { RTSCameraMouseController } from '@/clients/util/RTSCameraMouseControlle
 import { RTSCameraWheelController } from '@/clients/util/RTSCameraWheelController';
 
 import { GUI } from 'dat.gui';
-
+import ColorOption from './ColorOption';
 
 
 // import Recast from 'recast-detour'
@@ -231,7 +231,7 @@ const onSceneReady = (scene: Scene) => {
         mesh.position = new Vector3(0, 0, 6);
         mesh.rotation = new Vector3(0, -Math.PI / 2, 0)
 
-        // Create a skeleton viewer for the mesh
+        // Create a skeleton viewer for the mesh 
         let skeletonViewer = new SkeletonViewer(skeleton, mesh, scene);
         skeletonViewer.isEnabled = true; // Enable it
         skeletonViewer.color = Color3.Red(); // Change default color from white to red
@@ -265,48 +265,48 @@ const onSceneReady = (scene: Scene) => {
         });
     });
 
-    SceneLoader.ImportMesh('', '/src/assets/ex_tutorial/mso/', 'MsoLei.glb', scene, (meshes, particle, skeletons, animation) => {
-        // meshes.map(mesh => mesh.scaling = new Vector3(0.1, 0.1, 0.1))
-        console.log('meshes ', meshes)
-        console.log('particle ', particle)
-        console.log('skeletons ', skeletons)
+    // SceneLoader.ImportMesh('', '/src/assets/ex_tutorial/mso/', 'MsoLei.glb', scene, (meshes, particle, skeletons, animation) => {
+    //     // meshes.map(mesh => mesh.scaling = new Vector3(0.1, 0.1, 0.1))
+    //     console.log('meshes ', meshes)
+    //     console.log('particle ', particle)
+    //     console.log('skeletons ', skeletons)
 
-        let skeleton = skeletons[0]
+    //     let skeleton = skeletons[0]
 
-        let skeletonViewer = new SkeletonViewer(skeleton, meshes[0], scene);
-        skeletonViewer.isEnabled = true; // Enable it
-        skeletonViewer.color = Color3.Red(); // Change default color from white to red
-
-
-        const bidx = skeleton.getBoneIndexByName('Genesis9')
-        const test = skeleton.bones[bidx]
-        // test.getTransformNode()?.rotate(Axis.X, Math.PI / 4, Space.LOCAL);
-        // test.rotate(Axis.X, Math.PI / 4, Space.LOCAL);
-        // test.position = new Vector3(1, 5, 1);
+    //     let skeletonViewer = new SkeletonViewer(skeleton, meshes[0], scene);
+    //     skeletonViewer.isEnabled = true; // Enable it
+    //     skeletonViewer.color = Color3.Red(); // Change default color from white to red
 
 
-        console.log('animation ', animation)
+    //     const bidx = skeleton.getBoneIndexByName('Genesis9')
+    //     const test = skeleton.bones[bidx]
+    //     // test.getTransformNode()?.rotate(Axis.X, Math.PI / 4, Space.LOCAL);
+    //     // test.rotate(Axis.X, Math.PI / 4, Space.LOCAL);
+    //     // test.position = new Vector3(1, 5, 1);
 
-        const lei = meshes[0];
-        lei.position = new Vector3(0, 0, 0);
-        lei.rotation = new Vector3(0, -Math.PI / 2, 0);
-        lei.scaling = new Vector3(5, 5, 5);
+
+    //     console.log('animation ', animation)
+
+    //     const lei = meshes[0];
+    //     lei.position = new Vector3(0, 0, 0);
+    //     lei.rotation = new Vector3(0, -Math.PI / 2, 0);
+    //     lei.scaling = new Vector3(5, 5, 5);
 
 
-        const lidx = skeleton.getBoneIndexByName('r_upperarm')
-        console.log('tt ', lidx)
-        const leiThigh = skeleton.bones[lidx]
-        console.log('tt ', leiThigh)
+    //     const lidx = skeleton.getBoneIndexByName('r_upperarm')
+    //     console.log('tt ', lidx)
+    //     const leiThigh = skeleton.bones[lidx]
+    //     console.log('tt ', leiThigh)
 
-        const bone = scene.getTransformNodeByName("l_thigh");
+    //     const bone = scene.getTransformNodeByName("l_thigh");
 
-        scene.registerBeforeRender(() => {
-            bone!.scaling = new Vector3(config.leiThigh, config.leiThigh, config.leiThigh);
-            // leiThigh.setScale(new Vector3(config.leiThigh, config.leiThigh, config.leiThigh));
-            // leiThigh.scaling = new Vector3(config.leiThigh, config.leiThigh, config.leiThigh);
-        });
+    //     scene.registerBeforeRender(() => {
+    //         bone!.scaling = new Vector3(config.leiThigh, config.leiThigh, config.leiThigh);
+    //         // leiThigh.setScale(new Vector3(config.leiThigh, config.leiThigh, config.leiThigh));
+    //         // leiThigh.scaling = new Vector3(config.leiThigh, config.leiThigh, config.leiThigh);
+    //     });
 
-    })
+    // })
 
     // SceneLoader.ImportMesh('', '/src/assets/ex_tutorial/', 'WhipperNude.glb', scene, (meshes, particle, skeleton, animation) => {
 
@@ -361,12 +361,15 @@ const AssetTestScene = () => {
     }, [])
 
     return (
-        <SceneComponent
-            antialias
-            onSceneReady={onSceneReady}
-            // onRender={onRender}
-            id="my-canvas"
-        />
+        <>
+            <SceneComponent
+                antialias
+                onSceneReady={onSceneReady}
+                // onRender={onRender}
+                id="my-canvas"
+            />
+            <ColorOption />
+        </>
     );
 };
 

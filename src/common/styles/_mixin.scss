@@ -1,0 +1,16 @@
+
+
+/********************************
+* Break point Media
+********************************/
+@mixin medium-view {
+    @media (min-width: $medium-min-width) {
+       @content;
+    }
+   }
+
+   @mixin expanded-view {
+       @media (min-width: $expanded-min-width) {
+           @content;
+       }
+   }

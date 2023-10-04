@@ -1,27 +1,30 @@
 import { Textfit } from 'react-textfit';
 import ButtonCore, { ButtonCoreProps } from '../../_core/ButtonCore';
-import styles from './styles.module.scss';
+import styles from './style.module.scss';
 import { VariantType } from '@/common/types';
 import classNames from 'classnames';
 import { useMemo } from 'react';
+import Icon from '@/components/Icon';
 
-type ButtonProps = ButtonCoreProps & {
+export type IconButtonProps = ButtonCoreProps & {
   shape?: 'rect' | 'capsule';
   variant?: VariantType;
   size?: 'xs' | 's' | 'm' | 'l' | 'xl' | 'full';
   loading?: boolean;
+  iconName: string;
 };
 
-const Button = ({
+const IconButton = ({
   className,
   children,
   disabled,
   loading,
-  size = 'm',
+  size = 's',
   shape = 'capsule',
-  variant = 'primary',
+  variant = 'tertiary',
+  iconName,
   ...rest
-}: ButtonProps) => {
+}: IconButtonProps) => {
   const max = useMemo(() => {
     switch (size) {
       case 'full':
@@ -50,12 +53,15 @@ const Button = ({
         )}
         mode="single"
         max={max}
-        forceSingleModeWidth={false}
+        forceSingleModeWidth={true}
       >
-        {children}
+        <div className={styles.iconButtonWrapper}>
+          <Icon name={iconName} />
+          <p>{children}</p>
+        </div>
       </Textfit>
     </ButtonCore>
   );
 };
 
-export default Button;
+export default IconButton;

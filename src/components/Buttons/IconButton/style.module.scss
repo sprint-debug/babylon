@@ -5,13 +5,22 @@
   }
 }
 
+.iconButtonWrapper {
+  display: flex;
+  p {
+    display: flex;
+    justify-content: center;
+    width: 44px;
+    line-height: 20px;
+  }
+}
 .container {
   width: 100%;
   height: 100%;
   border: 1px solid $gray-scale-700;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
 }
 
 .primary {
@@ -47,7 +56,7 @@
 .s {
   width: rem(82px);
   height: rem(26px);
-  padding: rem(4px) rem(12px);
+  padding: 0 rem(6px);
 
   &.capsule {
     border-radius: rem(15px);

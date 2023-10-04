@@ -1,6 +1,6 @@
 import React from 'react';
 import { messageClient } from '@/clients/events';
-import Button from '@/components/Button';
+import Button from '@/components/Buttons/CustomButton';
 import { Outlet, NavLink } from 'react-router-dom';
 import { logger } from '@/common/utils/logger';
 import Text from '@/components/Text';

@@ -72,7 +72,6 @@ const WithHtmlText: FC = () => {
   )
 }
 
-
 const ReactBabylonTest: FC = () => {
   const cameraRef = useRef();
 
@@ -101,13 +100,11 @@ const ReactBabylonTest: FC = () => {
         <Scene>
           <freeCamera
             ref={cameraRef}
-
             name="camera1"
             position={new Vector3(0, 5, -10)}
             setTarget={[Vector3.Zero()]}
 
           />
-
           <hemisphericLight
             name="light1"
             intensity={0.7}
@@ -120,7 +117,7 @@ const ReactBabylonTest: FC = () => {
             position={new Vector3(0, 1, 0)}
             rotation={Vector3.Zero()}
           />
-          {/* <WithHtmlText /> */}
+          <WithHtmlText />
         </Scene>
       </Engine>
     </div>

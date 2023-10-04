@@ -24,6 +24,7 @@ export const uiHeightControlLockAtom = atom<boolean>(false);
 
 export const uiPlaceModeAtom = atom<boolean>(false);
 export const uiSkinModeAtom = atom<boolean>(false);
+export const uiBgColorOptionAtom = atom<boolean>(false);
 
 /** 카테고리 데이터 제어  */
 // export const superCtgrAtom = atom<ICategory>({});

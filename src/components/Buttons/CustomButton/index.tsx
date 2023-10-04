@@ -1,25 +1,9 @@
 import ButtonCore, { ButtonCoreProps } from '../../_core/ButtonCore';
 
-type CustomButtonProps = ButtonCoreProps & {
-  loading?: boolean;
-  className?: string;
-};
+type CustomButtonProps = ButtonCoreProps;
 
-const CustomButton = ({
-  children,
-  className,
-  disabled,
-  loading,
-  ...rest
-}: CustomButtonProps) => {
-  return (
-    <ButtonCore
-      className={className}
-      disabled={disabled || loading} {...rest}
-    >
-      {children}
-    </ButtonCore>
-  );
+const CustomButton = ({ ...rest }: CustomButtonProps) => {
+  return <ButtonCore {...rest} />;
 };
 
 export default CustomButton;

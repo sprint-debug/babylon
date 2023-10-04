@@ -1,0 +1,69 @@
+//*********************************
+//* Font Color
+//*********************************
+$font-color-100: var(--font-color-100); //FFFFFF
+$font-color-200: var(--font-color-200); //F9F9F9
+$font-color-300: var(--font-color-300); //EEEEEE
+$font-color-400: var(--font-color-400); //BBBBBB
+$font-color-500: var(--font-color-500); //999999
+$font-color-600: var(--font-color-600); //666666
+$font-color-700: var(--font-color-700); //000000
+
+//*********************************
+//* Font Weight
+//*********************************
+$font-weight-regular: 400;
+$font-weight-medium:500;
+$font-weight-bold: 700;
+
+
+//*********************************
+//* Colors
+//*********************************
+$primary-color: var(--primary-color);
+$secondary-color: var(--secondary-color);
+$tertiary-color: var(--tertiary-color);
+$fail-color: var(--fail-color);
+$default-background-color: var(--default-background-color);
+
+
+//*********************************
+//* z-index
+//*********************************
+$zindex-dropdown: 1000;
+$zindex-navigation: 1020;
+$zindex-fixed: 1030;
+$zindex-offcanvas-backdrop: 1040;
+$zindex-offcanvas: 1045;
+$zindex-modal-backdrop: 1050;
+$zindex-modal: 1055;
+$zindex-confirm-backdrop: 1070;
+$zindex-confirm: 1075;
+$zindex-alert-backdrop: 1080;
+$zindex-alert: 1085;
+$zindex-toast: 1090;
+
+//*********************************
+//* layout
+//*********************************
+$vh : var(--vh);
+$vh-100 : calc($vh * 100);
+$medium-min-width:750px;
+$expanded-min-width:840px;
+
+$navigation-size: rem(70px);
+$max-width: $medium-min-width;
+
+$full-button-height:rem(60px);
+
+
+//*********************************
+//* Font Size
+//*********************************
+$font-size-100:rem(10px);
+$font-size-200:rem(12px);
+$font-size-300:rem(14px);
+$font-size-400:rem(16px);
+$font-size-500:rem(20px);
+$font-size-600:rem(24px);
+

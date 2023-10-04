@@ -7,6 +7,7 @@ import localeKO from '@/common/locale/ko.json';
 import { getBrowserLanguage } from '@/common/utils/getBrowserLanguage';
 import Globalstyles from '@/common/styles/GlobalStyles';
 
+
 const queryClient = new QueryClient();
 
 i18n.use(initReactI18next).init({

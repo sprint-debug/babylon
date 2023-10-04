@@ -26,5 +26,12 @@ export default defineConfig({
         },
       },
     },
-  }
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "@/common/styles/_base.scss" as *;`
+      },
+    },
+  },
 });

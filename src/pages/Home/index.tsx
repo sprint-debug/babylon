@@ -1,7 +1,7 @@
 import React, { MouseEvent } from 'react';
 import HomeScene from './HomeScene';
 import { messageClient } from '@/clients/events';
-import Button from '@/components/Button';
+import Button from '@/components/Buttons/CustomButton';
 import Text from '@/components/Text';
 import FixedView from '../_shared/Layouts/FixedView';
 import style from "./style.module.scss";
